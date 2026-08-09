@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PixelWorks - Login</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .spinner {
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #3b82f6;
+            border-radius: 50%;
+            width: 14px;
+            height: 14px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            margin-left: 8px;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">PixelWorks</a>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="signup.html">Signup</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <section class="section" style="padding-top: 140px; max-width: 450px;">
+        <h2 class="section-title" style="margin-bottom: 10px;">Welcome Back</h2>
+        <p style="text-align: center; color: var(--text-muted); margin-bottom: 30px;">Apne account mein login karein.</p>
+        
+        <div class="card" style="padding: 30px; display: flex; flex-direction: column; gap: 20px;">
+            <div>
+                <label style="display: block; font-size: 14px; margin-bottom: 6px; color: var(--text-muted);">Phone Number</label>
+                <input type="tel" id="loginPhone" placeholder="Apna registered mobile number" style="width: 100%; padding: 12px; background: #090d16; border: 1px solid var(--border-color); border-radius: 8px; color: #fff; font-size: 14px;">
+            </div>
+            <div>
+                <label style="display: block; font-size: 14px; margin-bottom: 6px; color: var(--text-muted);">Password</label>
+                <input type="password" id="loginPass" placeholder="Password daalein" style="width: 100%; padding: 12px; background: #090d16; border: 1px solid var(--border-color); border-radius: 8px; color: #fff; font-size: 14px;">
+            </div>
+
+            <button id="loginBtn" class="btn-primary" style="padding: 12px; font-size: 15px; border: none; cursor: pointer; border-radius: 8px; display: flex; align-items: center; justify-content: center;">Login</button>
+            <div id="errorMsg" style="display: none; text-align: center; color: #ef4444; font-size: 13px;"></div>
+
+            <div style="text-align: center; margin-top: 15px; padding: 10px; background: #090d16; border: 1px solid var(--border-color); border-radius: 8px;">
+                <span style="font-size: 13px; color: var(--text-muted);">Naye ho? </span>
+                <a href="signup.html" style="color: #60a5fa; font-weight: 600; text-decoration: none; font-size: 14px;">Signup karein</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 1. Firebase SDK - PEHLE -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+
+    <!-- 2. TERA GLOBAL JS - DUSRA -->
+    <script src="script.js"></script>
+
+    <!-- 3. PAGE KA CODE - TEESRA -->
+    <script>
+        // Firebase Init
+        const firebaseConfig = {
+            apiKey: "AIzaSyBPFYE7EUeDJHpTKvBjY6ybHTj-85OYZFY",
+            authDomain: "pixelworks-agency.firebaseapp.com",
+            databaseURL: "https://pixelworks-agency-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "pixelworks-agency",
+            storageBucket: "pixelworks-agency.firebasestorage.app",
+            messagingSenderId: "265457916349",
+            appId: "1:265457916349:web:1f2f903ed3eaf858c51ad4",
+            measurementId: "G-21TVP274BD"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const rtdb = firebase.database();
+
+        document.getElementById('loginBtn').addEventListener('click', handleLogin);
+        document.getElementById('loginPass').addEventListener('keypress', function(e) {
+            if(e.key === 'Enter') handleLogin();
+        });
+
+        function handleLogin() {
+            const phone = document.getElementById('loginPhone').value.trim();
+            const pass = document.getElementById('loginPass').value.trim();
+            const btn = document.getElementById('loginBtn');
+            const errorMsg = document.getElementById('errorMsg');
+
+            errorMsg.style.display = 'none';
+
+            if(!phone || !pass) {
+                errorMsg.textContent = 'Phone aur Password dono bharo!';
+                errorMsg.style.display = 'block';
+                return;
+            }
+
+            btn.disabled = true;
+            btn.innerHTML = 'Logging in <span class="spinner"></span>';
+
+            let userKey = phone.replace(/[^0-9]/g, '');
+
+            rtdb.ref('users/' + userKey).once('value').then((snapshot) => {
+                if (!snapshot.exists()) {
+                    errorMsg.textContent = 'Yeh number registered nahi hai! Pehle Signup karein.';
+                    errorMsg.style.display = 'block';
+                    btn.disabled = false;
+                    btn.innerHTML = 'Login';
+                    return;
+                }
+
+                let userData = snapshot.val();
+                if (userData.pass !== pass) {
+                    errorMsg.textContent = 'Password galat hai!';
+                    errorMsg.style.display = 'block';
+                    btn.disabled = false;
+                    btn.innerHTML = 'Login';
+                    return;
+                }
+
+                let userObj = { name: userData.name, phone: userData.phone, userKey: userKey };
+                localStorage.setItem('pixelworks_logged_user', JSON.stringify(userObj));
+                
+                btn.innerHTML = 'Success! <span class="spinner"></span>';
+                setTimeout(() => { window.location.href = 'services.html'; }, 500);
+
+            }).catch((error) => {
+                errorMsg.textContent = 'Error: ' + error.message;
+                errorMsg.style.display = 'block';
+                btn.disabled = false;
+                btn.innerHTML = 'Login';
+            });
+        }
+    </script>
+</body>
+</html>

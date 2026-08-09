@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PixelWorks Agency - Inquire Now</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- EmailJS CDN Library - SIRF LOAD KARO, INIT MAT KARO -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">PixelWorks</a>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+                <li><a href="chat.html">Live Chat</a></li>
+                <li><a href="contact.html" class="active" style="color: #60a5fa;">Inquire Now</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <section class="section" style="padding-top: 140px; max-width: 700px;">
+        <h2 class="section-title" style="margin-bottom: 10px;">Start Your Project</h2>
+        <p style="text-align: center; color: var(--text-muted); margin-bottom: 40px;">Apni details share karein, humari team aapse turant sampark karegi.</p>
+        
+        <div class="card" style="padding: 40px;">
+            <form id="inquiryForm" style="display: flex; flex-direction: column; gap: 20px;">
+                <div>
+                    <label style="display: block; font-size: 14px; margin-bottom: 8px; color: var(--text-muted);">Aapka Naam</label>
+                    <input type="text" id="clientName" required placeholder="Naam likhein" style="width: 100%; padding: 14px; background: #090d16; border: 1px solid var(--border-color); border-radius: 8px; color: #fff; font-size: 15px;">
+                </div>
+                <div>
+                    <label style="display: block; font-size: 14px; margin-bottom: 8px; color: var(--text-muted);">Mobile Number</label>
+                    <input type="tel" id="clientPhone" required placeholder="Phone number" style="width: 100%; padding: 14px; background: #090d16; border: 1px solid var(--border-color); border-radius: 8px; color: #fff; font-size: 15px;">
+                </div>
+                <div>
+                    <label style="display: block; font-size: 14px; margin-bottom: 8px; color: var(--text-muted);">Aapka Profession / Business Type</label>
+                    <select id="clientProfession" style="width: 100%; padding: 14px; background: #090d16; border: 1px solid var(--border-color); border-radius: 8px; color: #fff; font-size: 15px;">
+                        <option value="Gym / Fitness">Gym / Fitness Center</option>
+                        <option value="Salon / Parlour">Salon & Beauty Parlour</option>
+                        <option value="Doctor / Clinic">Doctor / Medical Clinic</option>
+                        <option value="Local Store / Retail">Local Store / Retail Business</option>
+                        <option value="Other">Other Service Provider</option>
+                    </select>
+                </div>
+                <div>
+                    <label style="display: block; font-size: 14px; margin-bottom: 8px; color: var(--text-muted);">Website Kis Liye Chahiye?</label>
+                    <textarea id="clientDetails" rows="4" required placeholder="Apni zaroorat ya vision yahan describe karein..." style="width: 100%; padding: 14px; background: #090d16; border: 1px solid var(--border-color); border-radius: 8px; color: #fff; font-size: 15px; resize: vertical;"></textarea>
+                </div>
+                <button type="submit" id="submitBtn" class="btn-primary" style="width: 100%; margin-top: 10px;">Submit Inquiry</button>
+            </form>
+            <div id="successMsg" style="display: none; text-align: center; color: #34d399; margin-top: 20px; font-weight: 600;">
+                ✓ Inquiry successfully submit ho gayi hai! Hum jald aapse connect karenge.
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 PixelWorks Agency. Designed & Developed by Aditya<img src="verified.png" alt="Verified" class="verified-img" style="width: 16px; height: 16px;"></p>
+    </footer>
+
+    <!-- 1. Firebase SDK - PEHLE -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+
+    <!-- 2. TERA GLOBAL JS - DUSRA -->
+    <script src="script.js"></script>
+
+    <!-- 3. PAGE KA CODE - TEESRA -->
+    <script>
+        // EmailJS Init - Yaha karo jab page load ho gaya
+        (function(){
+            emailjs.init("7pe2qgdqIoOk4jqez");
+        })();
+
+        // URL se Plan wala data fill karo - DOM load ke baad
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            if(urlParams.get('plan')){
+                document.getElementById('clientDetails').value = `Mujhe ${urlParams.get('plan')} chahiye. Estimated Budget: ₹${urlParams.get('price')}`;
+            }
+        });
+
+        // Firebase Config
+        const firebaseConfig = {
+            apiKey: "AIzaSyBPFYE7EUeDJHpTKvBjY6ybHTj-85OYZFY",
+            authDomain: "pixelworks-agency.firebaseapp.com",
+            databaseURL: "https://pixelworks-agency-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "pixelworks-agency",
+            storageBucket: "pixelworks-agency.firebasestorage.app",
+            messagingSenderId: "265457916349",
+            appId: "1:265457916349:web:1f2f903ed3eaf858c51ad4",
+            measurementId: "G-21TVP274BD"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const rtdb = firebase.database();
+
+        document.getElementById('inquiryForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.innerText = "Sending...";
+            submitBtn.disabled = true;
+
+            const name = document.getElementById('clientName').value;
+            const phone = document.getElementById('clientPhone').value;
+            const profession = document.getElementById('clientProfession').value;
+            const message = document.getElementById('clientDetails').value;
+
+            const templateParams = {
+                from_name: name,
+                phone: phone,
+                profession: profession,
+                message: message
+            };
+
+            // 1. Pehle Firebase me save karo
+            rtdb.ref('inquiries').push({
+                name: name,
+                phone: phone,
+                profession: profession,
+                message: message,
+                time: Date.now()
+            });
+
+            // 2. Saath me Email bhi bhejo
+            emailjs.send('service_2d35rkr', 'template_jxb1ur8', templateParams)
+                .then(function(response) {
+                    console.log("EMAIL SUCCESS!", response.status);
+                    document.getElementById('inquiryForm').style.display = 'none';
+                    document.getElementById('successMsg').style.display = 'block';
+                    if(typeof playNotificationSound === 'function') playNotificationSound();
+                }, function(error) {
+                    console.log('EMAIL FAILED...', error);
+                    alert('Email nahi gaya, par data save ho gaya hai. Hum contact karenge!');
+                    document.getElementById('inquiryForm').style.display = 'none';
+                    document.getElementById('successMsg').style.display = 'block';
+                });
+        });
+    </script>
+</body>
+</html>

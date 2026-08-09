@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PixelWorks - Signup</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .spinner {
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #3b82f6;
+            border-radius: 50%;
+            width: 14px;
+            height: 14px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            margin-left: 8px;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">PixelWorks</a>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <section class="section" style="padding-top: 140px; max-width: 450px;">
+        <h2 class="section-title" style="margin-bottom: 10px;">Create Account</h2>
+        <p style="text-align: center; color: var(--text-muted); margin-bottom: 30px;">Services aur Live Chat access karne ke liye signup karein.</p>
+        
+        <div class="card" style="padding: 30px; display: flex; flex-direction: column; gap: 20px;">
+            <div>
+                <label style="display: block; font-size: 14px; margin-bottom: 6px; color: var(--text-muted);">Full Name</label>
+                <input type="text" id="signupName" required placeholder="Apna naam likhein" style="width: 100%; padding: 12px; background: #090d16; border: 1px solid var(--border-color); border-radius: 8px; color: #fff; font-size: 14px;">
+            </div>
+            <div>
+                <label style="display: block; font-size: 14px; margin-bottom: 6px; color: var(--text-muted);">Phone Number</label>
+                <input type="tel" id="signupPhone" required placeholder="10 digit mobile number" style="width: 100%; padding: 12px; background: #090d16; border: 1px solid var(--border-color); border-radius: 8px; color: #fff; font-size: 14px;">
+            </div>
+            <div>
+                <label style="display: block; font-size: 14px; margin-bottom: 6px; color: var(--text-muted);">Password</label>
+                <input type="password" id="signupPass" required placeholder="Minimum 4 characters" style="width: 100%; padding: 12px; background: #090d16; border: 1px solid var(--border-color); border-radius: 8px; color: #fff; font-size: 14px;">
+            </div>
+
+            <button id="signupBtn" class="btn-primary" style="padding: 12px; font-size: 15px; border: none; cursor: pointer; border-radius: 8px; display: flex; align-items: center; justify-content: center;">Register Now</button>
+            
+            <div id="errorMsg" style="display: none; text-align: center; color: #ef4444; font-size: 13px;"></div>
+
+            <div style="text-align: center; margin-top: 5px; padding: 10px; background: #090d16; border: 1px solid var(--border-color); border-radius: 8px;">
+                <span style="font-size: 13px; color: var(--text-muted);">Pehle se account hai? </span>
+                <a href="login.html" style="color: #60a5fa; font-weight: 600; text-decoration: none; font-size: 14px;">Login karein</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 1. Firebase SDK - PEHLE -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+
+    <!-- 2. TERA GLOBAL JS - DUSRA -->
+    <script src="script.js"></script>
+
+    <!-- 3. PAGE KA CODE - TEESRA -->
+    <script>
+        // Firebase Init
+        const firebaseConfig = {
+            apiKey: "AIzaSyBPFYE7EUeDJHpTKvBjY6ybHTj-85OYZFY",
+            authDomain: "pixelworks-agency.firebaseapp.com",
+            databaseURL: "https://pixelworks-agency-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "pixelworks-agency",
+            storageBucket: "pixelworks-agency.firebasestorage.app",
+            messagingSenderId: "265457916349",
+            appId: "1:265457916349:web:1f2f903ed3eaf858c51ad4",
+            measurementId: "G-21TVP274BD"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const rtdb = firebase.database();
+
+        document.getElementById('signupBtn').addEventListener('click', () => {
+            const name = document.getElementById('signupName').value.trim();
+            const phone = document.getElementById('signupPhone').value.trim();
+            const pass = document.getElementById('signupPass').value.trim();
+            const btn = document.getElementById('signupBtn');
+            const errorMsg = document.getElementById('errorMsg');
+
+            errorMsg.style.display = 'none';
+
+            if(!name || !phone || !pass) {
+                errorMsg.textContent = 'Bhai, saari details bharna zaroori hai!';
+                errorMsg.style.display = 'block';
+                return;
+            }
+            if(phone.length < 10) {
+                errorMsg.textContent = '10 digit ka sahi phone number daalo!';
+                errorMsg.style.display = 'block';
+                return;
+            }
+            if(pass.length < 4) {
+                errorMsg.textContent = 'Password kam se kam 4 characters ka ho!';
+                errorMsg.style.display = 'block';
+                return;
+            }
+
+            btn.disabled = true;
+            btn.innerHTML = 'Registering <span class="spinner"></span>';
+
+            let userKey = phone.replace(/[^0-9]/g, '');
+
+            rtdb.ref('users/' + userKey).once('value').then((snapshot) => {
+                if(snapshot.exists()){
+                    errorMsg.textContent = 'Ye number pehle se registered hai. Login karein!';
+                    errorMsg.style.display = 'block';
+                    btn.disabled = false;
+                    btn.innerHTML = 'Register Now';
+                } else {
+                    rtdb.ref('users/' + userKey).set({
+                        name: name,
+                        phone: phone,
+                        pass: pass,
+                        createdAt: Date.now()
+                    }, (error) => {
+                        if (error) {
+                            errorMsg.textContent = 'Error: ' + error.message;
+                            errorMsg.style.display = 'block';
+                            btn.disabled = false;
+                            btn.innerHTML = 'Register Now';
+                        } else {
+                            let userObj = { name, phone, userKey };
+                            localStorage.setItem('pixelworks_logged_user', JSON.stringify(userObj));
+                            setTimeout(() => { window.location.href = 'services.html'; }, 500);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
