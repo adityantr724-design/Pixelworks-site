@@ -2,1000 +2,741 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0">
 
-    <title>Portfolio | PixelWorks</title>
+    <title>PixelWorks - Portfolio</title>
+
+    <link rel="stylesheet" href="style.css">
 
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
 
         body {
-            background: #070b14;
-            color: #fff;
-            font-family: Arial, sans-serif;
-        }
-
-        /* =========================
-           HEADER
-        ========================= */
-
-        .portfolio-header {
-            height: 70px;
-
-            padding: 0 7%;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            background: rgba(7, 11, 20, 0.92);
-
-            border-bottom: 1px solid #1c2638;
-
-            position: sticky;
-            top: 0;
-
-            z-index: 100;
-
-            backdrop-filter: blur(15px);
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-
-            color: #4d8dff;
-
-            text-decoration: none;
-
-            font-size: 22px;
-            font-weight: 700;
-        }
-
-        .verified-badge {
-            width: 17px;
-            height: 17px;
-
-            object-fit: contain;
-        }
-
-        .back-btn {
-            color: #c8cfdd;
-
-            text-decoration: none;
-
-            padding: 9px 15px;
-
-            border: 1px solid #303b50;
-
-            border-radius: 8px;
-
-            transition: 0.2s;
-        }
-
-        .back-btn:hover {
-            border-color: #3b82f6;
-            color: #fff;
+            background: #090d16;
+            color: white;
         }
 
 
-        /* =========================
-           MAIN
-        ========================= */
+        .portfolio-page {
 
-        .portfolio {
-            width: min(100% - 30px, 700px);
-
-            margin: auto;
-        }
-
-
-        /* =========================
-           INTRO
-        ========================= */
-
-        .portfolio-intro {
-            text-align: center;
-
-            padding: 75px 10px 50px;
-        }
-
-        .small-title {
-            color: #4d8dff;
-
-            font-size: 12px;
-
-            letter-spacing: 3px;
-
-            font-weight: bold;
-
-            margin-bottom: 15px;
-        }
-
-        .portfolio-intro h1 {
-            font-size: clamp(42px, 8vw, 68px);
-
-            line-height: 1;
-
-            margin-bottom: 20px;
-        }
-
-        .portfolio-intro h1 span {
-            color: #4d8dff;
-        }
-
-        .portfolio-intro p:last-child {
-            max-width: 540px;
+            max-width: 650px;
 
             margin: auto;
 
-            color: #8992a5;
+            padding:
+                120px
+                15px
+                50px;
 
-            line-height: 1.7;
         }
 
 
-        /* =========================
-           STATUS
-        ========================= */
+        .portfolio-heading {
 
-        .status {
             text-align: center;
 
-            color: #8d96a8;
+            margin-bottom: 35px;
 
-            padding: 30px;
         }
 
 
-        /* =========================
-           POST
-        ========================= */
+        .portfolio-heading h1 {
+
+            font-size: 42px;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .portfolio-heading p {
+
+            color: #9ca3af;
+
+            line-height: 1.6;
+
+        }
+
 
         .portfolio-post {
-            background: #0d1320;
 
-            border: 1px solid #1c2638;
+            background: #111827;
 
-            border-radius: 18px;
+            border:
+                1px solid
+                #1f2937;
+
+            border-radius: 14px;
 
             overflow: hidden;
 
-            margin-bottom: 45px;
+            margin-bottom: 30px;
 
-            box-shadow:
-                0 15px 40px rgba(0, 0, 0, 0.25);
         }
 
 
-        /* =========================
-           POST HEADER
-        ========================= */
+        /* IMAGE AREA */
 
-        .post-top {
-            display: flex;
+        .post-image-container {
 
-            align-items: center;
+            position: relative;
 
-            gap: 12px;
-
-            padding: 16px 18px;
-        }
-
-        .profile-icon {
-            width: 42px;
-            height: 42px;
-
-            display: flex;
-
-            align-items: center;
-            justify-content: center;
-
-            border-radius: 50%;
-
-            background: #2563eb;
-
-            font-weight: bold;
-        }
-
-        .post-name {
-            display: flex;
-
-            flex-direction: column;
-
-            gap: 3px;
-        }
-
-        .verified-name {
-            display: flex;
-
-            align-items: center;
-
-            gap: 5px;
-        }
-
-        .verified-name strong {
-            font-size: 15px;
-        }
-
-        .verified-name img {
-            width: 16px;
-            height: 16px;
-
-            object-fit: contain;
-        }
-
-        .post-name small {
-            color: #727c90;
-
-            font-size: 12px;
-        }
-
-
-        /* =========================
-           IMAGES
-        ========================= */
-
-        .post-images {
-            display: grid;
-
-            grid-template-columns: repeat(2, 1fr);
-
-            gap: 3px;
-
-            background: #05070c;
-        }
-
-        .post-images.single-image {
-            grid-template-columns: 1fr;
-        }
-
-        .post-images img {
             width: 100%;
 
-            height: 300px;
+            aspect-ratio: 1 / 1;
 
-            display: block;
+            background: #05070c;
+
+            overflow: hidden;
+
+        }
+
+
+        .post-image {
+
+            width: 100%;
+
+            height: 100%;
 
             object-fit: cover;
 
-            cursor: pointer;
-        }
+            display: block;
 
-        .post-images.single-image img {
-            height: auto;
-
-            max-height: 650px;
         }
 
 
-        /* =========================
-           POST CONTENT
-        ========================= */
+        /* ARROWS */
 
-        .post-content {
-            padding: 24px;
-        }
+        .image-arrow {
 
-        .post-content h2 {
-            font-size: 23px;
-
-            margin-bottom: 10px;
-        }
-
-        .post-description {
-            color: #8d96a8;
-
-            line-height: 1.7;
-
-            margin-bottom: 18px;
-
-            white-space: pre-wrap;
-        }
-
-
-        /* =========================
-           TAGS
-        ========================= */
-
-        .tags {
-            display: flex;
-
-            flex-wrap: wrap;
-
-            gap: 8px;
-        }
-
-        .tags span {
-            color: #62a0ff;
-
-            font-size: 13px;
-        }
-
-
-        /* =========================
-           FOOTER
-        ========================= */
-
-        footer {
-            padding: 50px 7%;
-
-            margin-top: 70px;
-
-            border-top: 1px solid #182033;
-
-            text-align: center;
-        }
-
-        footer strong {
-            color: #4d8dff;
-        }
-
-        footer p {
-            color: #606a7c;
-
-            margin-top: 10px;
-
-            font-size: 13px;
-        }
-
-
-        /* =========================
-           IMAGE MODAL
-        ========================= */
-
-        .image-modal {
-            display: none;
-
-            position: fixed;
-
-            inset: 0;
-
-            background: rgba(0, 0, 0, 0.92);
-
-            z-index: 999;
-
-            align-items: center;
-            justify-content: center;
-
-            padding: 20px;
-        }
-
-        .image-modal.active {
-            display: flex;
-        }
-
-        .image-modal img {
-            max-width: 95vw;
-            max-height: 90vh;
-
-            object-fit: contain;
-
-            border-radius: 8px;
-        }
-
-        .close-modal {
             position: absolute;
 
-            top: 20px;
-            right: 25px;
+            top: 50%;
 
-            font-size: 32px;
+            transform:
+                translateY(-50%);
+
+            width: 38px;
+
+            height: 38px;
+
+            border-radius: 50%;
+
+            border: none;
+
+            background:
+                rgba(0,0,0,0.65);
 
             color: white;
 
+            font-size: 22px;
+
             cursor: pointer;
+
         }
 
 
-        /* =========================
-           MOBILE
-        ========================= */
+        .prev {
 
-        @media (max-width: 600px) {
+            left: 12px;
 
-            .portfolio-header {
-                padding: 0 5%;
-            }
-
-            .portfolio {
-                width: calc(100% - 20px);
-            }
-
-            .portfolio-intro {
-                padding: 60px 10px 40px;
-            }
-
-            .portfolio-intro h1 {
-                font-size: 43px;
-            }
-
-            .post-images {
-                grid-template-columns: 1fr;
-            }
-
-            .post-images img {
-                height: auto;
-
-                max-height: 500px;
-            }
-
-            .post-content {
-                padding: 20px;
-            }
-
-            .post-content h2 {
-                font-size: 20px;
-            }
-
-            .brand {
-                font-size: 19px;
-            }
-
-            .back-btn {
-                font-size: 13px;
-
-                padding: 8px 11px;
-            }
         }
+
+
+        .next {
+
+            right: 12px;
+
+        }
+
+
+        /* DOTS */
+
+        .image-dots {
+
+            position: absolute;
+
+            bottom: 12px;
+
+            left: 0;
+
+            right: 0;
+
+            text-align: center;
+
+        }
+
+
+        .dot {
+
+            display: inline-block;
+
+            width: 7px;
+
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: #6b7280;
+
+            margin: 0 3px;
+
+        }
+
+
+        .dot.active {
+
+            background: #3b82f6;
+
+        }
+
+
+        /* CONTENT */
+
+        .post-content {
+
+            padding: 20px;
+
+        }
+
+
+        .post-title {
+
+            font-size: 21px;
+
+            margin:
+                0
+                0
+                10px;
+
+        }
+
+
+        .post-description {
+
+            color: #9ca3af;
+
+            font-size: 14px;
+
+            line-height: 1.7;
+
+            margin: 0;
+
+            white-space: pre-wrap;
+
+        }
+
+
+        .post-date {
+
+            color: #6b7280;
+
+            font-size: 12px;
+
+            margin-top: 15px;
+
+        }
+
+
+        .empty {
+
+            text-align: center;
+
+            color: #9ca3af;
+
+            padding: 50px 10px;
+
+        }
+
+
+        @media(max-width:600px) {
+
+            .portfolio-heading h1 {
+
+                font-size: 32px;
+
+            }
+
+            .portfolio-page {
+
+                padding-top: 110px;
+
+            }
+
+        }
+
     </style>
+
 </head>
 
 
 <body>
 
 
-    <!-- =========================
-         HEADER
-    ========================= -->
+<!-- HEADER -->
 
-    <header class="portfolio-header">
+<header>
+
+    <div class="nav-container">
 
         <a
             href="index.html"
-            class="brand">
+            class="logo">
 
             PixelWorks
 
-            <img
-                src="verified.png"
-                class="verified-badge"
-                alt="Verified">
-
         </a>
 
 
-        <a
-            href="index.html"
-            class="back-btn">
+        <div
+            class="hamburger"
+            id="hamburger">
 
-            ← Home
+            <span></span>
 
-        </a>
+            <span></span>
 
-    </header>
+            <span></span>
 
-
-    <!-- =========================
-         MAIN
-    ========================= -->
-
-    <main class="portfolio">
+        </div>
 
 
-        <!-- INTRO -->
+        <ul
+            class="nav-links"
+            id="navLinks">
 
-        <section class="portfolio-intro">
+            <li>
+                <a href="index.html">
+                    Home
+                </a>
+            </li>
 
-            <p class="small-title">
-                OUR WORK
-            </p>
+            <li>
+                <a href="services.html">
+                    Services
+                </a>
+            </li>
 
-            <h1>
-                Projects we've
-                <span>built.</span>
-            </h1>
+            <li>
+                <a href="portfolio.html">
+                    Portfolio
+                </a>
+            </li>
 
-            <p>
-                A collection of websites, interfaces and
-                digital experiences created for businesses
-                and brands.
-            </p>
+            <li>
+                <a href="contact.html">
+                    Contact
+                </a>
+            </li>
 
-        </section>
+        </ul>
 
+    </div>
 
-        <!-- =========================
-             FIREBASE POSTS
-        ========================= -->
-
-        <section id="portfolioContainer">
-
-            <div class="status">
-                Loading projects...
-            </div>
-
-        </section>
-
-
-    </main>
+</header>
 
 
-    <!-- =========================
-         IMAGE MODAL
-    ========================= -->
+<!-- PORTFOLIO -->
 
-    <div
-        id="imageModal"
-        class="image-modal">
+<main class="portfolio-page">
 
-        <span
-            class="close-modal"
-            onclick="closeImage()">
 
-            ×
+    <div class="portfolio-heading">
 
-        </span>
+        <h1>
+            Our Work
+        </h1>
 
-        <img
-            id="modalImage"
-            src=""
-            alt="Project">
+        <p>
+            Real projects. Real designs.
+            Premium digital experiences built
+            for modern businesses.
+        </p>
 
     </div>
 
 
-    <!-- =========================
-         FOOTER
-    ========================= -->
+    <div id="portfolioPosts">
 
-    <footer>
+        <div class="empty">
+            Portfolio posts load ho rahi hain...
+        </div>
 
-        <strong>
-            PixelWorks
-        </strong>
-
-        <p>
-            © 2026 PixelWorks. All rights reserved.
-        </p>
-
-    </footer>
+    </div>
 
 
-
-    <!-- =========================
-         FIREBASE
-    ========================= -->
-
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
-
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+</main>
 
 
-    <script>
+<!-- FIREBASE -->
 
-        /* ==================================
-           FIREBASE CONFIG
-        ================================== */
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
 
-        const firebaseConfig = {
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
 
-            apiKey:
-                "AIzaSyBPFYE7EUeDJHpTKvBjY6ybHTj-85OYZFY",
+<script src="script.js"></script>
 
-            authDomain:
-                "pixelworks-agency.firebaseapp.com",
 
-            databaseURL:
-                "https://pixelworks-agency-default-rtdb.asia-southeast1.firebasedatabase.app",
+<script>
 
-            projectId:
-                "pixelworks-agency",
+const firebaseConfig = {
 
-            storageBucket:
-                "pixelworks-agency.firebasestorage.app",
+    apiKey: "AIzaSyBPFYE7EUeDJHpTKvBjY6ybHTj-85OYZFY",
 
-            messagingSenderId:
-                "265457916349",
+    authDomain:
+        "pixelworks-agency.firebaseapp.com",
 
-            appId:
-                "1:265457916349:web:1f2f903ed3eaf858c51ad4",
+    databaseURL:
+        "https://pixelworks-agency-default-rtdb.asia-southeast1.firebasedatabase.app",
 
-            measurementId:
-                "G-21TVP274BD"
+    projectId:
+        "pixelworks-agency",
+
+    storageBucket:
+        "pixelworks-agency.firebasestorage.app",
+
+    messagingSenderId:
+        "265457916349",
+
+    appId:
+        "1:265457916349:web:1f2f903ed3eaf858c51ad4",
+
+    measurementId:
+        "G-21TVP274BD"
+
+};
+
+
+firebase.initializeApp(firebaseConfig);
+
+const db =
+    firebase.database();
+
+
+/* =========================
+   LOAD PORTFOLIO
+========================= */
+
+db.ref("portfolioPosts")
+.on("value", function(snapshot) {
+
+    const container =
+        document.getElementById(
+            "portfolioPosts"
+        );
+
+
+    container.innerHTML = "";
+
+
+    if (!snapshot.exists()) {
+
+        container.innerHTML = `
+            <div class="empty">
+                Abhi portfolio me koi project nahi hai.
+            </div>
+        `;
+
+        return;
+    }
+
+
+    const posts = [];
+
+
+    snapshot.forEach(function(child) {
+
+        posts.push({
+
+            id: child.key,
+
+            ...child.val()
+
+        });
+
+    });
+
+
+    /* NEWEST FIRST */
+
+    posts.sort(function(a,b) {
+
+        return (
+            (b.createdAt || 0) -
+            (a.createdAt || 0)
+        );
+
+    });
+
+
+    posts.forEach(function(post) {
+
+        createPost(post, container);
+
+    });
+
+});
+
+
+/* =========================
+   CREATE POST
+========================= */
+
+function createPost(post, container) {
+
+    const postElement =
+        document.createElement("article");
+
+
+    postElement.className =
+        "portfolio-post";
+
+
+    const imageContainer =
+        document.createElement("div");
+
+
+    imageContainer.className =
+        "post-image-container";
+
+
+    const images =
+        Array.isArray(post.images)
+        ? post.images
+        : Object.values(post.images || {});
+
+
+    let currentIndex = 0;
+
+
+    const image =
+        document.createElement("img");
+
+
+    image.className =
+        "post-image";
+
+
+    image.alt =
+        post.title || "Portfolio project";
+
+
+    image.src =
+        images[0] || "";
+
+
+    imageContainer.appendChild(image);
+
+
+    /* =================
+       ARROWS
+    ================= */
+
+    if (images.length > 1) {
+
+        const prev =
+            document.createElement("button");
+
+        prev.className =
+            "image-arrow prev";
+
+        prev.textContent =
+            "‹";
+
+
+        const next =
+            document.createElement("button");
+
+        next.className =
+            "image-arrow next";
+
+        next.textContent =
+            "›";
+
+
+        imageContainer.appendChild(prev);
+
+        imageContainer.appendChild(next);
+
+
+        /* DOTS */
+
+        const dots =
+            document.createElement("div");
+
+        dots.className =
+            "image-dots";
+
+
+        images.forEach(function(_, index) {
+
+            const dot =
+                document.createElement("span");
+
+            dot.className =
+                "dot" +
+                (index === 0
+                    ? " active"
+                    : "");
+
+            dots.appendChild(dot);
+
+        });
+
+
+        imageContainer.appendChild(dots);
+
+
+        function updateImage() {
+
+            image.src =
+                images[currentIndex];
+
+
+            const allDots =
+                dots.querySelectorAll(".dot");
+
+
+            allDots.forEach(function(dot, index) {
+
+                dot.classList.toggle(
+                    "active",
+                    index === currentIndex
+                );
+
+            });
+
+        }
+
+
+        prev.onclick = function() {
+
+            currentIndex--;
+
+            if (currentIndex < 0) {
+
+                currentIndex =
+                    images.length - 1;
+
+            }
+
+            updateImage();
 
         };
 
 
-        firebase.initializeApp(
-            firebaseConfig
-        );
+        next.onclick = function() {
 
+            currentIndex++;
 
-        const database =
-            firebase.database();
+            if (
+                currentIndex >=
+                images.length
+            ) {
 
-
-
-        /* ==================================
-           LOAD PORTFOLIO
-        ================================== */
-
-        const portfolioContainer =
-            document.getElementById(
-                "portfolioContainer"
-            );
-
-
-        database
-            .ref("portfolio")
-            .orderByChild("createdAt")
-            .on(
-                "value",
-                function(snapshot) {
-
-                    portfolioContainer.innerHTML = "";
-
-
-                    /* NO POSTS */
-
-                    if (!snapshot.exists()) {
-
-                        portfolioContainer.innerHTML = `
-
-                            <div class="status">
-
-                                Abhi koi project
-                                publish nahi hua.
-
-                            </div>
-
-                        `;
-
-                        return;
-                    }
-
-
-                    const posts = [];
-
-
-                    /* FIREBASE DATA */
-
-                    snapshot.forEach(
-                        function(child) {
-
-                            posts.push({
-
-                                id: child.key,
-
-                                ...child.val()
-
-                            });
-
-                        }
-                    );
-
-
-                    /* NEWEST FIRST */
-
-                    posts.reverse();
-
-
-                    /* CREATE POSTS */
-
-                    posts.forEach(
-                        function(post) {
-
-                            createPost(post);
-
-                        }
-                    );
-
-                },
-                function(error) {
-
-                    console.error(error);
-
-
-                    portfolioContainer.innerHTML = `
-
-                        <div class="status">
-
-                            Projects load nahi ho pa rahe.
-                            Thodi der baad try karein.
-
-                        </div>
-
-                    `;
-
-                }
-            );
-
-
-
-        /* ==================================
-           CREATE POST
-        ================================== */
-
-        function createPost(post) {
-
-            const article =
-                document.createElement(
-                    "article"
-                );
-
-
-            article.className =
-                "portfolio-post";
-
-
-            /* ==============================
-               IMAGES
-            ============================== */
-
-            const images =
-                Array.isArray(post.images)
-                    ? post.images
-                    : [];
-
-
-            let imagesHTML = "";
-
-
-            images.forEach(
-                function(url) {
-
-                    imagesHTML += `
-
-                        <img
-                            src="${escapeHTML(url)}"
-                            alt="${escapeHTML(
-                                post.title || "Project"
-                            )}"
-                            onclick="openImage(this.src)"
-                            loading="lazy">
-
-                    `;
-
-                }
-            );
-
-
-            const imageClass =
-                images.length === 1
-                    ? "post-images single-image"
-                    : "post-images";
-
-
-
-            /* ==============================
-               TAGS
-            ============================== */
-
-            let tagsHTML = "";
-
-
-            const tags =
-                Array.isArray(post.tags)
-                    ? post.tags
-                    : [];
-
-
-            tags.forEach(
-                function(tag) {
-
-                    tagsHTML += `
-
-                        <span>
-                            #${escapeHTML(tag)}
-                        </span>
-
-                    `;
-
-                }
-            );
-
-
-
-            /* ==============================
-               POST HTML
-            ============================== */
-
-            article.innerHTML = `
-
-                <div class="post-top">
-
-                    <div class="profile-icon">
-                        P
-                    </div>
-
-
-                    <div class="post-name">
-
-                        <div class="verified-name">
-
-                            <strong>
-                                PixelWorks
-                            </strong>
-
-                            <img
-                                src="verified.png"
-                                alt="Verified">
-
-                        </div>
-
-
-                        <small>
-                            Web Development
-                        </small>
-
-                    </div>
-
-                </div>
-
-
-                <div class="${imageClass}">
-
-                    ${imagesHTML}
-
-                </div>
-
-
-                <div class="post-content">
-
-                    <h2>
-                        ${escapeHTML(
-                            post.title || ""
-                        )}
-                    </h2>
-
-
-                    <p class="post-description">
-
-                        ${escapeHTML(
-                            post.description || ""
-                        )}
-
-                    </p>
-
-
-                    <div class="tags">
-
-                        ${tagsHTML}
-
-                    </div>
-
-                </div>
-
-            `;
-
-
-            portfolioContainer.appendChild(
-                article
-            );
-
-        }
-
-
-
-        /* ==================================
-           SECURITY — ESCAPE HTML
-        ================================== */
-
-        function escapeHTML(value) {
-
-            return String(value)
-
-                .replaceAll(
-                    "&",
-                    "&amp;"
-                )
-
-                .replaceAll(
-                    "<",
-                    "&lt;"
-                )
-
-                .replaceAll(
-                    ">",
-                    "&gt;"
-                )
-
-                .replaceAll(
-                    '"',
-                    "&quot;"
-                )
-
-                .replaceAll(
-                    "'",
-                    "&#039;"
-                );
-
-        }
-
-
-
-        /* ==================================
-           IMAGE MODAL
-        ================================== */
-
-        function openImage(url) {
-
-            document
-                .getElementById("modalImage")
-                .src = url;
-
-
-            document
-                .getElementById("imageModal")
-                .classList.add("active");
-
-        }
-
-
-        function closeImage() {
-
-            document
-                .getElementById("imageModal")
-                .classList.remove("active");
-
-
-            document
-                .getElementById("modalImage")
-                .src = "";
-
-        }
-
-
-        /* CLICK OUTSIDE IMAGE */
-
-        document
-            .getElementById("imageModal")
-            .addEventListener(
-                "click",
-                function(e) {
-
-                    if (
-                        e.target ===
-                        this
-                    ) {
-
-                        closeImage();
-
-                    }
-
-                }
-            );
-
-
-        /* ESC KEY */
-
-        document.addEventListener(
-            "keydown",
-            function(e) {
-
-                if (
-                    e.key === "Escape"
-                ) {
-
-                    closeImage();
-
-                }
+                currentIndex = 0;
 
             }
-        );
 
-    </script>
+            updateImage();
+
+        };
+
+    }
+
+
+    /* =================
+       CONTENT
+    ================= */
+
+    const content =
+        document.createElement("div");
+
+
+    content.className =
+        "post-content";
+
+
+    const title =
+        document.createElement("h2");
+
+
+    title.className =
+        "post-title";
+
+
+    title.textContent =
+        post.title || "Untitled Project";
+
+
+    const description =
+        document.createElement("p");
+
+
+    description.className =
+        "post-description";
+
+
+    description.textContent =
+        post.description || "";
+
+
+    content.appendChild(title);
+
+    content.appendChild(description);
+
+
+    /* DATE */
+
+    if (post.createdAt) {
+
+        const date =
+            document.createElement("div");
+
+
+        date.className =
+            "post-date";
+
+
+        date.textContent =
+            new Date(
+                post.createdAt
+            ).toLocaleDateString(
+                "en-IN",
+                {
+                    day: "numeric",
+                    month: "short",
+                    year: "numeric"
+                }
+            );
+
+
+        content.appendChild(date);
+
+    }
+
+
+    postElement.appendChild(
+        imageContainer
+    );
+
+
+    postElement.appendChild(
+        content
+    );
+
+
+    container.appendChild(
+        postElement
+    );
+
+}
+
+</script>
 
 </body>
-
 </html>
