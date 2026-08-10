@@ -46,20 +46,9 @@
             font-weight: 600;
             font-size: 14px;
         }
-        .divider {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: #6b7280;
-            font-size: 12px;
-            margin: 20px 0;
-        }
-        .divider::before,
-        .divider::after {
-            content: "";
-            height: 1px;
-            background: #374151;
-            flex: 1;
+        .btn-primary {
+            background: #3b82f6;
+            color: white;
         }
         .auth-error {
             color: #ef4444;
@@ -84,13 +73,6 @@
             text-decoration: none;
             font-weight: 600;
         }
-        .google-btn {
-            display: flex; align-items: center; justify-content: center; gap: 12px;
-            width: 100%; padding: 14px 20px; margin-top: 16px;
-            background: #fff; color: #3c4043; border: 1px solid #dadce0;
-            border-radius: 12px; font-size: 16px; font-weight: 500; cursor: pointer;
-        }
-        .google-btn svg { width: 20px; height: 20px; }
     </style>
 </head>
 <body>
@@ -125,17 +107,14 @@
 
         <button id="signupBtn" class="auth-btn btn-primary">Create Account</button>
 
-        <div class="divider">OR</div>
-
         <p id="authMessage" class="auth-error"></p>
         <div class="bottom-text">Already have an account? <a href="login.html">Login</a></div>
     </div>
 </section>
+
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
-<!-- script.js ko abhi hata de test ke liye -->
-<!-- <script src="script.js"></script> -->
 
 <script>
 const firebaseConfig = {
@@ -152,9 +131,8 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.database();
-const googleProvider = new firebase.auth.GoogleAuthProvider();
 
-/* EMAIL SIGNUP */
+/* SIRF EMAIL SIGNUP - GOOGLE HATA DIYA */
 document.getElementById("signupBtn").addEventListener("click", async function() {
     const name = document.getElementById("signupName").value.trim();
     const email = document.getElementById("signupEmail").value.trim();
@@ -162,46 +140,47 @@ document.getElementById("signupBtn").addEventListener("click", async function() 
     const password = document.getElementById("signupPassword").value;
     const message = document.getElementById("authMessage");
 
-    message.textContent = ""; message.className = "auth-error";
-    if (!name || !email || !password) { message.textContent = "Name, email aur password bharna zaroori hai."; return; }
-    if (password.length < 6) { message.textContent = "Password kam se kam 6 characters ka hona chahiye."; return; }
+    message.textContent = ""; 
+    message.className = "auth-error";
+
+    if (!name || !email || !password) { 
+        message.textContent = "Name, email aur password bharna zaroori hai."; 
+        return; 
+    }
+    if (password.length < 6) { 
+        message.textContent = "Password kam se kam 6 characters ka hona chahiye."; 
+        return; 
+    }
 
     try {
         const result = await auth.createUserWithEmailAndPassword(email, password);
         const user = result.user;
         await user.updateProfile({ displayName: name });
-        await db.ref("users/" + user.uid).set({ uid: user.uid, name: name, email: user.email, phone: phone || "", createdAt: firebase.database.ServerValue.TIMESTAMP });
-        message.className = "auth-success"; message.textContent = "Account successfully create ho gaya!";
-        setTimeout(() => { window.location.href = "services.html"; }, 700);
+        await db.ref("users/" + user.uid).set({ 
+            uid: user.uid, 
+            name: name, 
+            email: user.email, 
+            phone: phone || "", 
+            createdAt: firebase.database.ServerValue.TIMESTAMP 
+        });
+        message.className = "auth-success"; 
+        message.textContent = "Account successfully create ho gaya!";
+        setTimeout(() => { 
+            window.location.href = "services.html"; 
+        }, 700);
     } catch(error) {
         console.error(error);
-        if (error.code === "auth/email-already-in-use") message.textContent = "Ye email already registered hai. Login karein.";
-        else if (error.code === "auth/invalid-email") message.textContent = "Email address sahi nahi hai.";
-        else if (error.code === "auth/weak-password") message.textContent = "Password thoda strong rakhein.";
-        else message.textContent = error.message;
+        if (error.code === "auth/email-already-in-use") {
+            message.textContent = "Ye email already registered hai. Login karein.";
+        } else if (error.code === "auth/invalid-email") {
+            message.textContent = "Email address sahi nahi hai.";
+        } else if (error.code === "auth/weak-password") {
+            message.textContent = "Password thoda strong rakhein.";
+        } else {
+            message.textContent = error.message;
+        }
     }
 });
-
-/* GOOGLE SIGNUP - WINDOW PE LAGA DIYA */
-window.signInWithGoogle = function() {
-    console.log("Google button clicked"); // test ke liye
-    const message = document.getElementById("authMessage");
-    message.textContent = "";
-    auth.signInWithPopup(googleProvider)
-    .then(async (result) => {
-        const user = result.user;
-        const userRef = db.ref("users/" + user.uid);
-        const snapshot = await userRef.once("value");
-        if (!snapshot.exists()) {
-            await userRef.set({ uid: user.uid, name: user.displayName || "", email: user.email || "", phone: user.phoneNumber || "", provider: "google", createdAt: firebase.database.ServerValue.TIMESTAMP });
-        }
-        window.location.href = "services.html";
-    })
-    .catch((error) => {
-        console.error("Google Error:", error);
-        message.textContent = error.message;
-    });
-}
 </script>
 </body>
 </html>
