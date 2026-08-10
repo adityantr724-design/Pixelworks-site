@@ -3,11 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>PixelWorks - Create Account</title>
-
     <link rel="stylesheet" href="style.css">
-
     <style>
         .auth-section {
             max-width: 450px;
@@ -15,38 +12,31 @@
             padding-top: 130px;
             padding-bottom: 60px;
         }
-
         .auth-card {
             background: #111827;
             border: 1px solid #1f2937;
             border-radius: 14px;
             padding: 30px;
         }
-
         .auth-input {
             width: 100%;
             padding: 13px;
             margin-top: 7px;
             margin-bottom: 17px;
-
             background: #090d16;
             border: 1px solid #374151;
             border-radius: 8px;
-
             color: white;
             outline: none;
             font-size: 14px;
         }
-
         .auth-input:focus {
             border-color: #3b82f6;
         }
-
         .auth-label {
             color: #9ca3af;
             font-size: 13px;
         }
-
         .auth-btn {
             width: 100%;
             padding: 13px;
@@ -56,13 +46,6 @@
             font-weight: 600;
             font-size: 14px;
         }
-
-        .google-btn {
-            background: white;
-            color: #111827;
-            margin-top: 12px;
-        }
-
         .divider {
             display: flex;
             align-items: center;
@@ -71,7 +54,6 @@
             font-size: 12px;
             margin: 20px 0;
         }
-
         .divider::before,
         .divider::after {
             content: "";
@@ -79,490 +61,186 @@
             background: #374151;
             flex: 1;
         }
-
         .auth-error {
             color: #ef4444;
             text-align: center;
             font-size: 13px;
             margin-top: 12px;
         }
-
         .auth-success {
             color: #22c55e;
             text-align: center;
             font-size: 13px;
             margin-top: 12px;
         }
-
         .bottom-text {
             text-align: center;
             margin-top: 20px;
             color: #9ca3af;
             font-size: 13px;
         }
-
         .bottom-text a {
             color: #60a5fa;
             text-decoration: none;
             font-weight: 600;
         }
+        .google-btn {
+            display: flex; align-items: center; justify-content: center; gap: 12px;
+            width: 100%; padding: 14px 20px; margin-top: 16px;
+            background: #fff; color: #3c4043; border: 1px solid #dadce0;
+            border-radius: 12px; font-size: 16px; font-weight: 500; cursor: pointer;
+        }
+        .google-btn svg { width: 20px; height: 20px; }
     </style>
 </head>
-
 <body>
 
 <header>
     <div class="nav-container">
-
-        <a href="index.html" class="logo">
-            PixelWorks
-        </a>
-
-        <div class="hamburger" id="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-
+        <a href="index.html" class="logo">PixelWorks</a>
+        <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
         <ul class="nav-links" id="navLinks">
-            <li>
-                <a href="index.html">Home</a>
-            </li>
-
-            <li>
-                <a href="login.html">Login</a>
-            </li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="login.html">Login</a></li>
         </ul>
-
     </div>
 </header>
 
-
 <section class="auth-section">
-
     <div class="auth-card">
+        <h2 class="section-title" style="margin-bottom:8px;">Create Account</h2>
+        <p style="text-align:center; color:#9ca3af; margin-bottom:25px;">PixelWorks ke saath shuru karein.</p>
 
-        <h2
-            class="section-title"
-            style="margin-bottom:8px;">
-            Create Account
-        </h2>
+        <label class="auth-label">Full Name *</label>
+        <input type="text" id="signupName" class="auth-input" placeholder="Apna naam" autocomplete="name">
 
-        <p
-            style="
-            text-align:center;
-            color:#9ca3af;
-            margin-bottom:25px;">
-            PixelWorks ke saath shuru karein.
-        </p>
+        <label class="auth-label">Email Address *</label>
+        <input type="email" id="signupEmail" class="auth-input" placeholder="you@example.com" autocomplete="email">
 
+        <label class="auth-label">Phone Number <span style="color:#6b7280;">(Optional)</span></label>
+        <input type="tel" id="signupPhone" class="auth-input" placeholder="10 digit mobile number" autocomplete="tel">
 
-        <!-- NAME -->
+        <label class="auth-label">Password *</label>
+        <input type="password" id="signupPassword" class="auth-input" placeholder="Minimum 6 characters" autocomplete="new-password">
 
-        <label class="auth-label">
-            Full Name *
-        </label>
+        <button id="signupBtn" class="auth-btn btn-primary">Create Account</button>
 
-        <input
-            type="text"
-            id="signupName"
-            class="auth-input"
-            placeholder="Apna naam"
-            autocomplete="name">
+        <div class="divider">OR</div>
 
-
-        <!-- EMAIL -->
-
-        <label class="auth-label">
-            Email Address *
-        </label>
-
-        <input
-            type="email"
-            id="signupEmail"
-            class="auth-input"
-            placeholder="you@example.com"
-            autocomplete="email">
-
-
-        <!-- PHONE OPTIONAL -->
-
-        <label class="auth-label">
-            Phone Number
-            <span style="color:#6b7280;">
-                (Optional)
-            </span>
-        </label>
-
-        <input
-            type="tel"
-            id="signupPhone"
-            class="auth-input"
-            placeholder="10 digit mobile number"
-            autocomplete="tel">
-
-
-        <!-- PASSWORD -->
-
-        <label class="auth-label">
-            Password *
-        </label>
-
-        <input
-            type="password"
-            id="signupPassword"
-            class="auth-input"
-            placeholder="Minimum 6 characters"
-            autocomplete="new-password">
-
-
-        <button
-            id="signupBtn"
-            class="auth-btn btn-primary">
-
-            Create Account
-
+        <button class="google-btn" onclick="signInWithGoogle()">
+            <svg viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"/><path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"/><path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"/><path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"/></svg>
+            Continue with Google
         </button>
 
-
-        <div class="divider">
-            OR
-        </div>
-
-
-        <!-- GOOGLE -->
-<style>
-.google-btn {
-  display: flex; align-items: center; justify-content: center; gap: 12px;
-  width: 100%; padding: 14px 20px; margin-top: 16px;
-  background: #fff; color: #3c4043; border: 1px solid #dadce0;
-  border-radius: 12px; font-size: 16px; font-weight: 500; cursor: pointer;
-}
-.google-btn svg { width: 20px; height: 20px; }
-</style>
-
-<button class="google-btn" onclick="signInWithGoogle()">
-  <svg viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"/><path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"/><path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"/><path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"/></svg>
-  Continue with Google
-</button>
-
-        <p
-            id="authMessage"
-            class="auth-error">
-        </p>
-
-
-        <div class="bottom-text">
-
-            Already have an account?
-
-            <a href="login.html">
-                Login
-            </a>
-
-        </div>
-
+        <p id="authMessage" class="auth-error"></p>
+        <div class="bottom-text">Already have an account? <a href="login.html">Login</a></div>
     </div>
-
 </section>
 
-
-<!-- FIREBASE -->
-
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
-
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
-
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
-
 <script src="script.js"></script>
 
-
 <script>
-
 const firebaseConfig = {
-
-    apiKey:
-        "AIzaSyBPFYE7EUeDJHpTKvBjY6ybHTj-85OYZFY",
-
-    authDomain:
-        "pixelworks-agency.firebaseapp.com",
-
-    databaseURL:
-        "https://pixelworks-agency-default-rtdb.asia-southeast1.firebasedatabase.app",
-
-    projectId:
-        "pixelworks-agency",
-
-    storageBucket:
-        "pixelworks-agency.firebasestorage.app",
-
-    messagingSenderId:
-        "265457916349",
-
-    appId:
-        "1:265457916349:web:1f2f903ed3eaf858c51ad4",
-
-    measurementId:
-        "G-21TVP274BD"
+    apiKey: "AIzaSyBPFYE7EUeDJHpTKvBjY6ybHTj-85OYZFY",
+    authDomain: "pixelworks-agency.firebaseapp.com",
+    databaseURL: "https://pixelworks-agency-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "pixelworks-agency",
+    storageBucket: "pixelworks-agency.firebasestorage.app",
+    messagingSenderId: "265457916349",
+    appId: "1:265457916349:web:1f2f903ed3eaf858c51ad4",
+    measurementId: "G-21TVP274BD"
 };
 
-
 firebase.initializeApp(firebaseConfig);
-
 const auth = firebase.auth();
-
 const db = firebase.database();
+const googleProvider = new firebase.auth.GoogleAuthProvider();
 
-
-const googleProvider =
-    new firebase.auth.GoogleAuthProvider();
-
-
-/* =========================
-   EMAIL SIGNUP
-========================= */
-
-document
-.getElementById("signupBtn")
-.addEventListener("click", async function() {
-
-    const name =
-        document
-        .getElementById("signupName")
-        .value.trim();
-
-    const email =
-        document
-        .getElementById("signupEmail")
-        .value.trim();
-
-    const phone =
-        document
-        .getElementById("signupPhone")
-        .value.trim();
-
-    const password =
-        document
-        .getElementById("signupPassword")
-        .value;
-
-
-    const message =
-        document
-        .getElementById("authMessage");
-
+/* EMAIL SIGNUP - same as before */
+document.getElementById("signupBtn").addEventListener("click", async function() {
+    const name = document.getElementById("signupName").value.trim();
+    const email = document.getElementById("signupEmail").value.trim();
+    const phone = document.getElementById("signupPhone").value.trim();
+    const password = document.getElementById("signupPassword").value;
+    const message = document.getElementById("authMessage");
 
     message.textContent = "";
     message.className = "auth-error";
 
-
     if (!name || !email || !password) {
-
-        message.textContent =
-            "Name, email aur password bharna zaroori hai.";
-
+        message.textContent = "Name, email aur password bharna zaroori hai.";
         return;
     }
-
-
     if (password.length < 6) {
-
-        message.textContent =
-            "Password kam se kam 6 characters ka hona chahiye.";
-
+        message.textContent = "Password kam se kam 6 characters ka hona chahiye.";
         return;
     }
-
 
     try {
-
-        const result =
-            await auth
-            .createUserWithEmailAndPassword(
-                email,
-                password
-            );
-
-
-        const user =
-            result.user;
-
-
-        /* Firebase Auth profile */
-
-        await user.updateProfile({
-
-            displayName: name
-
-        });
-
-
-        /* User information */
-
-        await db
-        .ref("users/" + user.uid)
-        .set({
-
+        const result = await auth.createUserWithEmailAndPassword(email, password);
+        const user = result.user;
+        await user.updateProfile({ displayName: name });
+        await db.ref("users/" + user.uid).set({
             uid: user.uid,
-
             name: name,
-
             email: user.email,
-
             phone: phone || "",
-
-            createdAt:
-                firebase.database.ServerValue.TIMESTAMP
-
+            createdAt: firebase.database.ServerValue.TIMESTAMP
         });
-
-
-        message.className =
-            "auth-success";
-
-        message.textContent =
-            "Account successfully create ho gaya!";
-
-
+        message.className = "auth-success";
+        message.textContent = "Account successfully create ho gaya!";
         setTimeout(function() {
-
-            window.location.href =
-                "services.html";
-
+            window.location.href = "services.html";
         }, 700);
-
-
     } catch(error) {
-
         console.error(error);
-
-
-        if (
-            error.code ===
-            "auth/email-already-in-use"
-        ) {
-
-            message.textContent =
-                "Ye email already registered hai. Login karein.";
-
+        if (error.code === "auth/email-already-in-use") {
+            message.textContent = "Ye email already registered hai. Login karein.";
+        } else if (error.code === "auth/invalid-email") {
+            message.textContent = "Email address sahi nahi hai.";
+        } else if (error.code === "auth/weak-password") {
+            message.textContent = "Password thoda strong rakhein.";
+        } else {
+            message.textContent = error.message;
         }
-
-        else if (
-            error.code ===
-            "auth/invalid-email"
-        ) {
-
-            message.textContent =
-                "Email address sahi nahi hai.";
-
-        }
-
-        else if (
-            error.code ===
-            "auth/weak-password"
-        ) {
-
-            message.textContent =
-                "Password thoda strong rakhein.";
-
-        }
-
-        else {
-
-            message.textContent =
-                error.message;
-
-        }
-
     }
-
 });
 
-
-/* =========================
-   GOOGLE SIGNUP
-========================= */
-
-document
-.getElementById("googleSignupBtn")
-.addEventListener("click", async function() {
-
-    const message =
-        document
-        .getElementById("authMessage");
-
-
+/* GOOGLE SIGNUP - FIXED */
+function signInWithGoogle() {
+    const message = document.getElementById("authMessage");
     message.textContent = "";
 
-
-    try {
-
-        const result =
-            await auth
-            .signInWithPopup(
-                googleProvider
-            );
-
-
-        const user =
-            result.user;
-
-
-        const userRef =
-            db.ref(
-                "users/" +
-                user.uid
-            );
-
-
-        const snapshot =
-            await userRef.once("value");
-
+    auth.signInWithPopup(googleProvider)
+    .then(async (result) => {
+        const user = result.user;
+        const userRef = db.ref("users/" + user.uid);
+        const snapshot = await userRef.once("value");
 
         if (!snapshot.exists()) {
-
             await userRef.set({
-
                 uid: user.uid,
-
-                name:
-                    user.displayName || "",
-
-                email:
-                    user.email || "",
-
-                phone:
-                    user.phoneNumber || "",
-
-                provider:
-                    "google",
-
-                createdAt:
-                    firebase.database.ServerValue.TIMESTAMP
-
+                name: user.displayName || "",
+                email: user.email || "",
+                phone: user.phoneNumber || "",
+                provider: "google",
+                createdAt: firebase.database.ServerValue.TIMESTAMP
             });
-
         }
-
-
-        window.location.href =
-            "services.html";
-
-
-    } catch(error) {
-
+        window.location.href = "services.html";
+    })
+    .catch((error) => {
         console.error(error);
-
-
-        message.textContent =
-            error.message;
-
-    }
-
-});
-
+        if(error.code === 'auth/unauthorized-domain') {
+            message.textContent = "Error: Netlify domain Firebase me authorized nahi hai";
+        } else {
+            message.textContent = error.message;
+        }
+    });
+}
 </script>
-
 </body>
 </html>
