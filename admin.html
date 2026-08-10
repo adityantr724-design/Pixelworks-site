@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>PixelWorks - Admin Dashboard</title>
+    <title>PixelWorks - Admin Panel</title>
 
     <style>
         * {
@@ -13,274 +13,346 @@
 
         body {
             margin: 0;
-            background: #090d16;
-            color: #fff;
             font-family: Arial, sans-serif;
+            background: #080b12;
+            color: #fff;
         }
 
-        .page {
-            max-width: 1100px;
+        header {
+            background: #0d111b;
+            border-bottom: 1px solid #202938;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav {
+            max-width: 1200px;
             margin: auto;
-            padding: 20px;
-        }
-
-        .header {
+            padding: 18px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 18px;
-            background: #111827;
-            border: 1px solid #1f2937;
-            border-radius: 12px;
-            margin-bottom: 20px;
         }
 
-        .header h2 {
-            margin: 0;
+        .logo {
+            color: #fff;
+            text-decoration: none;
+            font-size: 22px;
+            font-weight: 800;
+        }
+
+        .logo span {
+            color: #3b82f6;
+        }
+
+        .admin-badge {
             color: #60a5fa;
-            font-size: 20px;
+            font-size: 13px;
+            margin-right: 15px;
         }
 
         button {
+            border: none;
             cursor: pointer;
+            border-radius: 8px;
         }
 
-        .logout {
+        .logout-btn {
             background: #ef4444;
             color: white;
-            border: none;
             padding: 9px 15px;
-            border-radius: 7px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 35px 20px;
+        }
+
+        .page-title {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #94a3b8;
+            margin-bottom: 30px;
+        }
+
+        .hidden {
+            display: none !important;
         }
 
         /* LOGIN */
 
         .login-box {
-            max-width: 400px;
-            margin: 80px auto;
+            max-width: 420px;
+            margin: 100px auto;
+            background: #101621;
+            border: 1px solid #202938;
+            border-radius: 15px;
             padding: 30px;
-            background: #111827;
-            border: 1px solid #1f2937;
-            border-radius: 14px;
         }
 
         .login-box h2 {
+            margin-top: 0;
             text-align: center;
         }
 
-        .input,
-        textarea {
+        input,
+        textarea,
+        select {
             width: 100%;
             padding: 12px;
-            margin-top: 8px;
-            margin-bottom: 15px;
-
-            background: #090d16;
-            border: 1px solid #374151;
-            border-radius: 8px;
-
+            margin-top: 7px;
+            margin-bottom: 17px;
+            background: #080d16;
+            border: 1px solid #293548;
             color: white;
-            font-size: 14px;
+            border-radius: 8px;
             outline: none;
         }
 
-        .input:focus,
-        textarea:focus {
+        input:focus,
+        textarea:focus,
+        select:focus {
             border-color: #3b82f6;
         }
 
-        .main-btn {
+        textarea {
+            min-height: 110px;
+            resize: vertical;
+        }
+
+        label {
+            font-size: 14px;
+            color: #cbd5e1;
+        }
+
+        .primary-btn {
             width: 100%;
-            padding: 12px;
-            background: #3b82f6;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-        }
-
-        .main-btn:hover {
+            padding: 13px;
             background: #2563eb;
+            color: white;
+            font-weight: 700;
         }
 
-        .error {
-            color: #ef4444;
-            text-align: center;
-            font-size: 13px;
+        .primary-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .danger-btn {
+            background: #dc2626;
+            color: white;
+            padding: 9px 13px;
+        }
+
+        .edit-btn {
+            background: #334155;
+            color: white;
+            padding: 9px 13px;
         }
 
         /* DASHBOARD */
 
-        #dashboard {
-            display: none;
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: #101621;
+            border: 1px solid #202938;
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .stat-card h3 {
+            margin: 0 0 8px;
+            color: #94a3b8;
+            font-size: 14px;
+        }
+
+        .stat-card strong {
+            font-size: 28px;
         }
 
         .tabs {
             display: flex;
             gap: 10px;
-            margin-bottom: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
         }
 
         .tab-btn {
-            padding: 11px 18px;
-            border-radius: 8px;
-            border: 1px solid #374151;
             background: #111827;
-            color: white;
+            border: 1px solid #293548;
+            color: #cbd5e1;
+            padding: 10px 16px;
         }
 
         .tab-btn.active {
             background: #2563eb;
+            color: white;
             border-color: #2563eb;
         }
 
         .panel {
-            background: #111827;
-            border: 1px solid #1f2937;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
+            background: #101621;
+            border: 1px solid #202938;
+            border-radius: 14px;
+            padding: 25px;
         }
 
-        .panel h3 {
+        .panel h2 {
             margin-top: 0;
         }
 
-        .hint {
-            color: #9ca3af;
-            font-size: 13px;
-            line-height: 1.5;
+        .project-form {
+            margin-bottom: 35px;
+            padding: 20px;
+            background: #0b1019;
+            border: 1px solid #202938;
+            border-radius: 12px;
         }
 
-        /* PORTFOLIO */
-
-        #portfolioPanel {
-            display: block;
-        }
-
-        .post-card {
-            background: #090d16;
-            border: 1px solid #374151;
-            border-radius: 10px;
-            padding: 15px;
-            margin-top: 15px;
-        }
-
-        .post-card h4 {
-            margin: 0 0 7px;
-        }
-
-        .post-card p {
-            color: #9ca3af;
-            font-size: 13px;
-        }
-
-        .delete-btn {
-            background: #dc2626;
-            border: none;
-            color: white;
-            padding: 8px 12px;
-            border-radius: 6px;
-        }
-
-        /* CHAT */
-
-        .chat-grid {
+        .form-row {
             display: grid;
-            grid-template-columns: 280px 1fr;
+            grid-template-columns: 1fr 1fr;
             gap: 15px;
         }
 
-        .clients {
-            background: #090d16;
-            border: 1px solid #374151;
-            border-radius: 10px;
-            padding: 10px;
-            min-height: 400px;
+        .projects-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
         }
 
-        .client {
-            padding: 12px;
-            border: 1px solid #374151;
-            border-radius: 7px;
-            margin-bottom: 8px;
-            cursor: pointer;
+        .project-card {
+            background: #0b1019;
+            border: 1px solid #253044;
+            border-radius: 12px;
+            overflow: hidden;
         }
 
-        .client:hover,
-        .client.active {
-            border-color: #3b82f6;
-            background: #111827;
+        .project-card img {
+            width: 100%;
+            height: 170px;
+            object-fit: cover;
+            display: block;
+            background: #151b27;
         }
 
-        .chat {
-            background: #090d16;
-            border: 1px solid #374151;
-            border-radius: 10px;
-            padding: 15px;
-            min-height: 400px;
-
-            display: flex;
-            flex-direction: column;
+        .project-content {
+            padding: 16px;
         }
 
-        #messages {
-            flex: 1;
-            overflow-y: auto;
-            padding: 15px 0;
+        .project-content h3 {
+            margin: 0 0 7px;
         }
 
-        .message {
-            padding: 9px 13px;
-            border-radius: 9px;
-            margin-bottom: 8px;
-            max-width: 75%;
-            white-space: pre-wrap;
+        .category {
+            color: #60a5fa;
             font-size: 13px;
         }
 
-        .admin-msg {
-            background: #2563eb;
-            margin-left: auto;
+        .description {
+            color: #94a3b8;
+            font-size: 14px;
+            line-height: 1.5;
+            margin: 10px 0;
         }
 
-        .client-msg {
-            background: #1f2937;
-        }
-
-        .send-row {
+        .actions {
             display: flex;
             gap: 8px;
+            margin-top: 15px;
         }
 
-        .send-row input {
-            margin: 0;
+        .actions button {
+            flex: 1;
         }
 
-        .send-row button {
-            width: 100px;
+        .empty {
+            text-align: center;
+            color: #64748b;
+            padding: 35px;
         }
 
-        @media(max-width: 700px) {
+        .message {
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
 
-            .page {
-                padding: 12px;
+        .success {
+            background: #052e16;
+            color: #86efac;
+        }
+
+        .error {
+            background: #450a0a;
+            color: #fca5a5;
+        }
+
+        .item {
+            border: 1px solid #253044;
+            border-radius: 10px;
+            padding: 16px;
+            margin-bottom: 12px;
+            background: #0b1019;
+        }
+
+        .item small {
+            color: #64748b;
+        }
+
+        @media(max-width: 900px) {
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
             }
 
-            .chat-grid {
+            .projects-list {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media(max-width: 600px) {
+            .nav {
+                padding: 15px;
+            }
+
+            .admin-badge {
+                display: none;
+            }
+
+            .container {
+                padding: 25px 15px;
+            }
+
+            .page-title {
+                font-size: 26px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .projects-list {
                 grid-template-columns: 1fr;
             }
 
-            .clients {
-                min-height: auto;
-            }
-
-            .tabs {
-                overflow-x: auto;
-            }
-
-            .tab-btn {
-                white-space: nowrap;
+            .panel {
+                padding: 16px;
             }
         }
     </style>
@@ -288,241 +360,292 @@
 
 <body>
 
-<div class="page">
+<!-- ================= LOGIN ================= -->
 
-    <!-- HEADER -->
+<div id="loginScreen" class="login-box">
 
-    <div class="header">
+    <h2>🔐 Admin Login</h2>
 
-        <h2>PixelWorks Admin</h2>
+    <p style="text-align:center;color:#94a3b8;font-size:14px;">
+        PixelWorks Administration
+    </p>
 
-        <button
-            id="logoutBtn"
-            class="logout"
-            style="display:none;"
-            onclick="logoutAdmin()">
-            Logout
-        </button>
+    <div id="loginError" class="message error hidden"></div>
 
-    </div>
+    <label>Email</label>
+    <input
+        type="email"
+        id="adminEmail"
+        placeholder="Admin email"
+    >
+
+    <label>Password</label>
+    <input
+        type="password"
+        id="adminPassword"
+        placeholder="Admin password"
+    >
+
+    <button class="primary-btn" id="loginBtn">
+        Login to Admin Panel
+    </button>
+
+</div>
 
 
-    <!-- LOGIN -->
+<!-- ================= ADMIN PANEL ================= -->
 
-    <div id="loginBox" class="login-box">
+<div id="adminScreen" class="hidden">
 
-        <h2>Admin Login</h2>
+    <header>
+        <div class="nav">
 
-        <p class="hint" style="text-align:center;">
-            Sirf authorized admin account se login karein.
+            <a href="index.html" class="logo">
+                Pixel<span>Works</span>
+            </a>
+
+            <div>
+                <span class="admin-badge">👑 Administrator</span>
+
+                <button class="logout-btn" id="logoutBtn">
+                    Logout
+                </button>
+            </div>
+
+        </div>
+    </header>
+
+
+    <main class="container">
+
+        <h1 class="page-title">Admin Dashboard</h1>
+
+        <p class="subtitle">
+            Manage your PixelWorks website from here.
         </p>
 
-        <label>Email</label>
 
-        <input
-            type="email"
-            id="adminEmail"
-            class="input"
-            placeholder="Admin email"
-            required>
+        <!-- STATS -->
 
+        <div class="stats">
 
-        <label>Password</label>
+            <div class="stat-card">
+                <h3>Portfolio Projects</h3>
+                <strong id="portfolioCount">0</strong>
+            </div>
 
-        <input
-            type="password"
-            id="adminPassword"
-            class="input"
-            placeholder="Admin password"
-            required>
+            <div class="stat-card">
+                <h3>Reviews</h3>
+                <strong id="reviewCount">0</strong>
+            </div>
 
+            <div class="stat-card">
+                <h3>Inquiries</h3>
+                <strong id="inquiryCount">0</strong>
+            </div>
 
-        <button
-            class="main-btn"
-            onclick="adminLogin()">
+            <div class="stat-card">
+                <h3>Chats</h3>
+                <strong id="chatCount">0</strong>
+            </div>
 
-            Login
-
-        </button>
-
-        <p id="loginError" class="error"></p>
-
-    </div>
+        </div>
 
 
-    <!-- DASHBOARD -->
-
-    <div id="dashboard">
+        <!-- TABS -->
 
         <div class="tabs">
 
-            <button
-                id="portfolioTab"
-                class="tab-btn active"
-                onclick="showPortfolio()">
-
-                Portfolio
-
+            <button class="tab-btn active" data-tab="portfolioTab">
+                📁 Portfolio
             </button>
 
-            <button
-                id="chatTab"
-                class="tab-btn"
-                onclick="showChats()">
+            <button class="tab-btn" data-tab="inquiriesTab">
+                📩 Inquiries
+            </button>
 
-                Client Chats
+            <button class="tab-btn" data-tab="reviewsTab">
+                ⭐ Reviews
+            </button>
 
+            <button class="tab-btn" data-tab="chatsTab">
+                💬 Chats
             </button>
 
         </div>
 
 
-        <!-- PORTFOLIO PANEL -->
+        <!-- ================= PORTFOLIO ================= -->
 
-        <div id="portfolioPanel">
+        <section id="portfolioTab" class="panel">
 
-            <div class="panel">
+            <h2>Portfolio Manager</h2>
 
-                <h3>Create Portfolio Post</h3>
+            <p style="color:#94a3b8;">
+                Yahan se portfolio projects add, edit aur delete kar sakte ho.
+            </p>
 
-                <p class="hint">
-                    Yahan se bina code edit kiye portfolio me post publish kar sakte ho.
-                </p>
+            <div id="portfolioMessage"></div>
 
 
-                <label>Project Title</label>
+            <div class="project-form">
+
+                <h3 id="formTitle">➕ Add New Project</h3>
+
+                <input type="hidden" id="projectId">
+
+                <div class="form-row">
+
+                    <div>
+                        <label>Project Title</label>
+                        <input
+                            type="text"
+                            id="projectTitle"
+                            placeholder="e.g. Gym Website"
+                        >
+                    </div>
+
+                    <div>
+                        <label>Category</label>
+
+                        <select id="projectCategory">
+
+                            <option value="Web Development">
+                                Web Development
+                            </option>
+
+                            <option value="App Development">
+                                App Development
+                            </option>
+
+                            <option value="UI/UX Design">
+                                UI/UX Design
+                            </option>
+
+                            <option value="AI">
+                                AI
+                            </option>
+
+                            <option value="Cybersecurity">
+                                Cybersecurity
+                            </option>
+
+                            <option value="Other">
+                                Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <label>Project Image URL</label>
 
                 <input
-                    id="postTitle"
-                    class="input"
-                    type="text"
-                    placeholder="Example: Premium Gym Website">
+                    type="url"
+                    id="projectImage"
+                    placeholder="https://example.com/project-image.jpg"
+                >
+
+
+                <label>Live Website URL</label>
+
+                <input
+                    type="url"
+                    id="projectLink"
+                    placeholder="https://example.com"
+                >
 
 
                 <label>Description</label>
 
                 <textarea
-                    id="postDescription"
-                    rows="5"
-                    placeholder="Project ke baare mein likho..."></textarea>
-
-
-                <label>Image URLs</label>
-
-                <textarea
-                    id="postImages"
-                    rows="6"
-                    placeholder="Har image ka URL alag line me paste karo.
-
-https://example.com/image1.jpg
-https://example.com/image2.jpg
-https://example.com/image3.jpg"></textarea>
+                    id="projectDescription"
+                    placeholder="Project ke baare mein short description..."
+                ></textarea>
 
 
                 <button
-                    class="main-btn"
-                    onclick="publishPost()">
-
-                    🚀 Publish Portfolio Post
-
+                    class="primary-btn"
+                    id="saveProjectBtn"
+                >
+                    Save Project
                 </button>
 
-
-                <p id="postStatus" class="hint"></p>
+                <button
+                    class="edit-btn hidden"
+                    id="cancelEditBtn"
+                    style="width:100%;margin-top:10px;"
+                >
+                    Cancel Edit
+                </button>
 
             </div>
 
 
-            <!-- EXISTING POSTS -->
+            <h3>Existing Projects</h3>
 
-            <div class="panel">
-
-                <h3>Published Posts</h3>
-
-                <div id="adminPosts">
-
-                    <p class="hint">
-                        Posts load ho rahe hain...
-                    </p>
-
+            <div id="projectsList" class="projects-list">
+                <div class="empty">
+                    Loading projects...
                 </div>
-
             </div>
 
-        </div>
+        </section>
 
 
-        <!-- CHAT PANEL -->
+        <!-- ================= INQUIRIES ================= -->
 
-        <div id="chatPanel" style="display:none;">
+        <section id="inquiriesTab" class="panel hidden">
 
-            <div class="panel">
+            <h2>📩 Client Inquiries</h2>
 
-                <h3>Client Chats</h3>
-
-                <div class="chat-grid">
-
-                    <div class="clients">
-
-                        <div id="clientsList">
-                            <p class="hint">
-                                Clients load ho rahe hain...
-                            </p>
-                        </div>
-
-                    </div>
-
-
-                    <div class="chat">
-
-                        <h4 id="chatTitle">
-                            Client select karein
-                        </h4>
-
-                        <div id="messages">
-
-                            <p class="hint">
-                                Left side se client select karein.
-                            </p>
-
-                        </div>
-
-
-                        <div class="send-row">
-
-                            <input
-                                id="replyInput"
-                                class="input"
-                                type="text"
-                                placeholder="Reply..."
-                                disabled>
-
-                            <button
-                                class="main-btn"
-                                onclick="sendReply()"
-                                disabled
-                                id="sendBtn">
-
-                                Send
-
-                            </button>
-
-                        </div>
-
-                    </div>
-
+            <div id="inquiriesList">
+                <div class="empty">
+                    Loading inquiries...
                 </div>
-
             </div>
 
-        </div>
+        </section>
 
-    </div>
+
+        <!-- ================= REVIEWS ================= -->
+
+        <section id="reviewsTab" class="panel hidden">
+
+            <h2>⭐ Reviews</h2>
+
+            <div id="reviewsList">
+                <div class="empty">
+                    Loading reviews...
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- ================= CHATS ================= -->
+
+        <section id="chatsTab" class="panel hidden">
+
+            <h2>💬 Client Chats</h2>
+
+            <div id="chatsList">
+                <div class="empty">
+                    Loading chats...
+                </div>
+            </div>
+
+        </section>
+
+    </main>
 
 </div>
 
 
-<!-- FIREBASE -->
+<!-- ================= FIREBASE ================= -->
 
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
 
@@ -534,102 +657,92 @@ https://example.com/image3.jpg"></textarea>
 <script>
 
 const firebaseConfig = {
-
     apiKey: "AIzaSyBPFYE7EUeDJHpTKvBjY6ybHTj-85OYZFY",
-
     authDomain: "pixelworks-agency.firebaseapp.com",
-
-    databaseURL:
-    "https://pixelworks-agency-default-rtdb.asia-southeast1.firebasedatabase.app",
-
+    databaseURL: "https://pixelworks-agency-default-rtdb.asia-southeast1.firebasedatabase.app",
     projectId: "pixelworks-agency",
-
-    storageBucket:
-    "pixelworks-agency.firebasestorage.app",
-
+    storageBucket: "pixelworks-agency.firebasestorage.app",
     messagingSenderId: "265457916349",
-
-    appId:
-    "1:265457916349:web:1f2f903ed3eaf858c51ad4",
-
+    appId: "1:265457916349:web:1f2f903ed3eaf858c51ad4",
     measurementId: "G-21TVP274BD"
-
 };
-
 
 firebase.initializeApp(firebaseConfig);
 
 const auth = firebase.auth();
-
 const db = firebase.database();
 
-
-/* YOUR ADMIN UID */
-
-const ADMIN_UID =
-"MSbStxjennTwlhhW8cT75ONjRrm2";
+const ADMIN_UID = "MSbStxjennTwlhhW8cT75ONjRrm2";
 
 
-let activeClient = null;
+/* ================= AUTH ================= */
 
-
-/* =========================
-   AUTH CHECK
-========================= */
-
-auth.onAuthStateChanged(async function(user) {
+auth.onAuthStateChanged(async (user) => {
 
     if (!user) {
 
-        showLogin();
+        document.getElementById("loginScreen")
+            .classList.remove("hidden");
+
+        document.getElementById("adminScreen")
+            .classList.add("hidden");
 
         return;
     }
 
+    if (user.uid !== ADMIN_UID) {
+
+        await auth.signOut();
+
+        showLoginError(
+            "Ye account admin nahi hai."
+        );
+
+        return;
+    }
 
     try {
 
-        const adminSnapshot =
+        const snapshot =
             await db.ref("admins/" + user.uid).once("value");
 
-
         if (
-            user.uid === ADMIN_UID &&
-            adminSnapshot.exists() &&
-            adminSnapshot.val().role === "admin"
+            !snapshot.exists() ||
+            snapshot.val().role !== "admin"
         ) {
-
-            showDashboard();
-
-        } else {
 
             await auth.signOut();
 
-            document.getElementById("loginError").textContent =
-                "Ye account admin nahi hai.";
+            showLoginError(
+                "Admin permission nahi mili."
+            );
 
-            showLogin();
-
+            return;
         }
 
-    } catch(error) {
+        document.getElementById("loginScreen")
+            .classList.add("hidden");
+
+        document.getElementById("adminScreen")
+            .classList.remove("hidden");
+
+        loadDashboard();
+
+    } catch (error) {
 
         console.error(error);
 
-        document.getElementById("loginError").textContent =
-            "Admin verification failed.";
+        showLoginError(
+            "Admin verification failed."
+        );
 
-        showLogin();
     }
 
 });
 
 
-/* =========================
-   LOGIN
-========================= */
-
-function adminLogin() {
+document.getElementById("loginBtn")
+.addEventListener("click", async () => {
 
     const email =
         document.getElementById("adminEmail").value.trim();
@@ -637,565 +750,657 @@ function adminLogin() {
     const password =
         document.getElementById("adminPassword").value;
 
-
-    const error =
-        document.getElementById("loginError");
-
-
-    error.textContent = "";
-
-
     if (!email || !password) {
 
-        error.textContent =
-            "Email aur password dono bharo.";
+        showLoginError(
+            "Email aur password dono bharo."
+        );
 
         return;
     }
 
+    const btn =
+        document.getElementById("loginBtn");
 
-    auth.signInWithEmailAndPassword(
-        email,
-        password
-    )
+    btn.disabled = true;
+    btn.textContent = "Logging in...";
 
-    .catch(function(error) {
+    try {
 
-        console.error(error);
+        await auth.signInWithEmailAndPassword(
+            email,
+            password
+        );
 
-        error =
+    } catch (error) {
+
+        showLoginError(
+            "Login failed: " + error.message
+        );
+
+    }
+
+    btn.disabled = false;
+    btn.textContent = "Login to Admin Panel";
+
+});
+
+
+document.getElementById("logoutBtn")
+.addEventListener("click", () => {
+
+    auth.signOut();
+
+});
+
+
+function showLoginError(message) {
+
+    const box =
         document.getElementById("loginError");
 
-        error.textContent =
-            "Email ya password galat hai.";
+    box.textContent = message;
+    box.classList.remove("hidden");
+
+}
+
+
+/* ================= TABS ================= */
+
+document.querySelectorAll(".tab-btn")
+.forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        document.querySelectorAll(".tab-btn")
+        .forEach(btn => btn.classList.remove("active"));
+
+        button.classList.add("active");
+
+        document.querySelectorAll(".panel")
+        .forEach(panel => panel.classList.add("hidden"));
+
+        document.getElementById(button.dataset.tab)
+        .classList.remove("hidden");
+
+    });
+
+});
+
+
+/* ================= DASHBOARD ================= */
+
+function loadDashboard() {
+
+    loadPortfolio();
+    loadInquiries();
+    loadReviews();
+    loadChats();
+
+}
+
+
+/* ================= PORTFOLIO ================= */
+
+const portfolioRef = db.ref("portfolio");
+
+
+function loadPortfolio() {
+
+    portfolioRef.on("value", snapshot => {
+
+        const list =
+            document.getElementById("projectsList");
+
+        list.innerHTML = "";
+
+        let count = 0;
+
+        if (!snapshot.exists()) {
+
+            list.innerHTML = `
+                <div class="empty">
+                    Abhi koi portfolio project nahi hai.
+                </div>
+            `;
+
+            document.getElementById("portfolioCount")
+                .textContent = "0";
+
+            return;
+        }
+
+        snapshot.forEach(child => {
+
+            count++;
+
+            const project =
+                child.val();
+
+            const id =
+                child.key;
+
+            const card =
+                document.createElement("div");
+
+            card.className = "project-card";
+
+            card.innerHTML = `
+
+                <img
+                    src="${escapeHtml(project.image || '')}"
+                    alt="${escapeHtml(project.title || 'Project')}"
+                    onerror="this.style.display='none'"
+                >
+
+                <div class="project-content">
+
+                    <h3>
+                        ${escapeHtml(project.title || "Untitled")}
+                    </h3>
+
+                    <div class="category">
+                        ${escapeHtml(project.category || "Other")}
+                    </div>
+
+                    <div class="description">
+                        ${escapeHtml(project.description || "")}
+                    </div>
+
+                    <div class="actions">
+
+                        <button
+                            class="edit-btn"
+                            onclick="editProject('${id}')"
+                        >
+                            Edit
+                        </button>
+
+                        <button
+                            class="danger-btn"
+                            onclick="deleteProject('${id}')"
+                        >
+                            Delete
+                        </button>
+
+                    </div>
+
+                </div>
+            `;
+
+            list.appendChild(card);
+
+        });
+
+        document.getElementById("portfolioCount")
+            .textContent = count;
 
     });
 
 }
 
 
-/* =========================
-   SHOW DASHBOARD
-========================= */
+/* ================= SAVE PROJECT ================= */
 
-function showDashboard() {
+document.getElementById("saveProjectBtn")
+.addEventListener("click", async () => {
 
-    document.getElementById("loginBox")
-        .style.display = "none";
-
-    document.getElementById("dashboard")
-        .style.display = "block";
-
-    document.getElementById("logoutBtn")
-        .style.display = "block";
-
-
-    loadPortfolioPosts();
-
-    loadClients();
-
-}
-
-
-/* =========================
-   SHOW LOGIN
-========================= */
-
-function showLogin() {
-
-    document.getElementById("loginBox")
-        .style.display = "block";
-
-    document.getElementById("dashboard")
-        .style.display = "none";
-
-    document.getElementById("logoutBtn")
-        .style.display = "none";
-
-}
-
-
-/* =========================
-   LOGOUT
-========================= */
-
-function logoutAdmin() {
-
-    auth.signOut();
-
-}
-
-
-/* =========================
-   TABS
-========================= */
-
-function showPortfolio() {
-
-    document.getElementById("portfolioPanel")
-        .style.display = "block";
-
-    document.getElementById("chatPanel")
-        .style.display = "none";
-
-    document.getElementById("portfolioTab")
-        .classList.add("active");
-
-    document.getElementById("chatTab")
-        .classList.remove("active");
-
-}
-
-
-function showChats() {
-
-    document.getElementById("portfolioPanel")
-        .style.display = "none";
-
-    document.getElementById("chatPanel")
-        .style.display = "block";
-
-    document.getElementById("portfolioTab")
-        .classList.remove("active");
-
-    document.getElementById("chatTab")
-        .classList.add("active");
-
-}
-
-
-/* =========================
-   PUBLISH PORTFOLIO POST
-========================= */
-
-function publishPost() {
+    const id =
+        document.getElementById("projectId").value;
 
     const title =
-        document.getElementById("postTitle")
-        .value.trim();
+        document.getElementById("projectTitle").value.trim();
 
+    const category =
+        document.getElementById("projectCategory").value;
+
+    const image =
+        document.getElementById("projectImage").value.trim();
+
+    const link =
+        document.getElementById("projectLink").value.trim();
 
     const description =
-        document.getElementById("postDescription")
+        document.getElementById("projectDescription")
         .value.trim();
 
 
-    const imageText =
-        document.getElementById("postImages")
-        .value.trim();
+    if (!title || !description) {
 
-
-    const status =
-        document.getElementById("postStatus");
-
-
-    if (!title || !description || !imageText) {
-
-        status.textContent =
-            "Title, description aur images bharna zaroori hai.";
-
-        status.style.color = "#ef4444";
+        showPortfolioMessage(
+            "Project title aur description zaroori hai.",
+            false
+        );
 
         return;
     }
 
 
-    const images =
-        imageText
-        .split("\n")
-        .map(function(url) {
-            return url.trim();
-        })
-        .filter(function(url) {
-            return url.length > 0;
-        });
+    const projectData = {
+
+        title: title,
+
+        category: category,
+
+        image: image,
+
+        link: link,
+
+        description: description,
+
+        updatedAt: firebase.database.ServerValue.TIMESTAMP
+
+    };
 
 
-    if (images.length === 0) {
+    const btn =
+        document.getElementById("saveProjectBtn");
 
-        status.textContent =
-            "Kam se kam ek image URL daalo.";
+    btn.disabled = true;
+    btn.textContent = "Saving...";
 
-        status.style.color = "#ef4444";
 
-        return;
+    try {
+
+        if (id) {
+
+            await portfolioRef
+                .child(id)
+                .update(projectData);
+
+            showPortfolioMessage(
+                "Project successfully updated! ✅",
+                true
+            );
+
+        } else {
+
+            projectData.createdAt =
+                firebase.database.ServerValue.TIMESTAMP;
+
+            await portfolioRef
+                .push(projectData);
+
+            showPortfolioMessage(
+                "Project successfully added! ✅",
+                true
+            );
+
+        }
+
+        clearProjectForm();
+
+    } catch (error) {
+
+        console.error(error);
+
+        showPortfolioMessage(
+            "Error: " + error.message,
+            false
+        );
+
     }
 
+    btn.disabled = false;
+    btn.textContent = "Save Project";
 
-    db.ref("portfolioPosts")
-        .push({
-
-            title: title,
-
-            description: description,
-
-            images: images,
-
-            createdAt: firebase.database.ServerValue.TIMESTAMP,
-
-            authorUid: auth.currentUser.uid
-
-        })
-
-        .then(function() {
-
-            status.textContent =
-                "✅ Portfolio post successfully publish ho gaya!";
-
-            status.style.color = "#22c55e";
+});
 
 
-            document.getElementById("postTitle")
-                .value = "";
+/* ================= EDIT ================= */
 
-            document.getElementById("postDescription")
-                .value = "";
+window.editProject = async function(id) {
 
-            document.getElementById("postImages")
-                .value = "";
+    const snapshot =
+        await portfolioRef
+        .child(id)
+        .once("value");
 
-        })
+    if (!snapshot.exists()) return;
 
-        .catch(function(error) {
+    const project =
+        snapshot.val();
 
-            console.error(error);
+    document.getElementById("projectId")
+        .value = id;
 
-            status.textContent =
-                "Error: " + error.message;
+    document.getElementById("projectTitle")
+        .value = project.title || "";
 
-            status.style.color = "#ef4444";
+    document.getElementById("projectCategory")
+        .value = project.category || "Web Development";
 
-        });
+    document.getElementById("projectImage")
+        .value = project.image || "";
+
+    document.getElementById("projectLink")
+        .value = project.link || "";
+
+    document.getElementById("projectDescription")
+        .value = project.description || "";
+
+    document.getElementById("formTitle")
+        .textContent = "✏️ Edit Project";
+
+    document.getElementById("cancelEditBtn")
+        .classList.remove("hidden");
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+};
+
+
+/* ================= DELETE ================= */
+
+window.deleteProject = async function(id) {
+
+    const confirmDelete =
+        confirm(
+            "Kya tum is project ko permanently delete karna chahte ho?"
+        );
+
+    if (!confirmDelete) return;
+
+    try {
+
+        await portfolioRef
+            .child(id)
+            .remove();
+
+        showPortfolioMessage(
+            "Project deleted successfully. 🗑️",
+            true
+        );
+
+    } catch (error) {
+
+        showPortfolioMessage(
+            "Delete error: " + error.message,
+            false
+        );
+
+    }
+
+};
+
+
+/* ================= CANCEL EDIT ================= */
+
+document.getElementById("cancelEditBtn")
+.addEventListener("click", () => {
+
+    clearProjectForm();
+
+});
+
+
+function clearProjectForm() {
+
+    document.getElementById("projectId")
+        .value = "";
+
+    document.getElementById("projectTitle")
+        .value = "";
+
+    document.getElementById("projectImage")
+        .value = "";
+
+    document.getElementById("projectLink")
+        .value = "";
+
+    document.getElementById("projectDescription")
+        .value = "";
+
+    document.getElementById("projectCategory")
+        .value = "Web Development";
+
+    document.getElementById("formTitle")
+        .textContent = "➕ Add New Project";
+
+    document.getElementById("cancelEditBtn")
+        .classList.add("hidden");
 
 }
 
 
-/* =========================
-   LOAD ADMIN POSTS
-========================= */
+function showPortfolioMessage(text, success) {
 
-function loadPortfolioPosts() {
+    const box =
+        document.getElementById("portfolioMessage");
 
-    db.ref("portfolioPosts")
-        .on("value", function(snapshot) {
+    box.innerHTML = `
+        <div class="message ${success ? "success" : "error"}">
+            ${escapeHtml(text)}
+        </div>
+    `;
 
-            const container =
-                document.getElementById("adminPosts");
+    setTimeout(() => {
 
-            container.innerHTML = "";
+        box.innerHTML = "";
 
-
-            if (!snapshot.exists()) {
-
-                container.innerHTML =
-                    '<p class="hint">Abhi koi post publish nahi hui.</p>';
-
-                return;
-            }
-
-
-            const posts = [];
-
-
-            snapshot.forEach(function(child) {
-
-                posts.push({
-
-                    id: child.key,
-
-                    ...child.val()
-
-                });
-
-            });
-
-
-            posts.reverse();
-
-
-            posts.forEach(function(post) {
-
-                const card =
-                    document.createElement("div");
-
-                card.className =
-                    "post-card";
-
-
-                const title =
-                    document.createElement("h4");
-
-                title.textContent =
-                    post.title;
-
-
-                const description =
-                    document.createElement("p");
-
-                description.textContent =
-                    post.description;
-
-
-                const imageInfo =
-                    document.createElement("p");
-
-                imageInfo.textContent =
-                    (post.images || []).length +
-                    " image(s)";
-
-
-                const deleteButton =
-                    document.createElement("button");
-
-                deleteButton.className =
-                    "delete-btn";
-
-                deleteButton.textContent =
-                    "Delete Post";
-
-
-                deleteButton.onclick =
-                    function() {
-
-                        if (
-                            confirm(
-                                "Kya tum ye post delete karna chahte ho?"
-                            )
-                        ) {
-
-                            db.ref(
-                                "portfolioPosts/" + post.id
-                            ).remove();
-
-                        }
-
-                    };
-
-
-                card.appendChild(title);
-
-                card.appendChild(description);
-
-                card.appendChild(imageInfo);
-
-                card.appendChild(deleteButton);
-
-
-                container.appendChild(card);
-
-            });
-
-        });
+    }, 4000);
 
 }
 
 
-/* =========================
-   CLIENT LIST
-========================= */
+/* ================= INQUIRIES ================= */
 
-function loadClients() {
+function loadInquiries() {
 
-    db.ref("chats").on("value", function(snapshot) {
+    db.ref("inquiries")
+    .on("value", snapshot => {
 
         const list =
-            document.getElementById("clientsList");
+            document.getElementById("inquiriesList");
 
         list.innerHTML = "";
 
+        let count = 0;
 
         if (!snapshot.exists()) {
 
             list.innerHTML =
-                '<p class="hint">Abhi koi client nahi hai.</p>';
+                `<div class="empty">No inquiries yet.</div>`;
+
+            document.getElementById("inquiryCount")
+                .textContent = "0";
 
             return;
         }
 
+        snapshot.forEach(child => {
 
-        snapshot.forEach(function(child) {
+            count++;
 
-            const phone =
-                child.key;
-
-            const client =
+            const data =
                 child.val();
-
 
             const div =
                 document.createElement("div");
 
-            div.className =
-                "client";
+            div.className = "item";
 
+            div.innerHTML = `
 
-            if (activeClient === phone) {
+                <strong>
+                    ${escapeHtml(data.name || "Unknown")}
+                </strong>
 
-                div.classList.add("active");
+                <p>
+                    ${escapeHtml(data.message || "")}
+                </p>
 
-            }
+                <small>
+                    ${escapeHtml(data.profession || "")}
+                    ${data.phone ? " • " + escapeHtml(data.phone) : ""}
+                </small>
 
-
-            div.textContent =
-                client.name || phone;
-
-
-            div.onclick =
-                function() {
-
-                    openChat(phone);
-
-                };
-
+            `;
 
             list.appendChild(div);
 
         });
 
+        document.getElementById("inquiryCount")
+            .textContent = count;
+
     });
 
 }
 
 
-/* =========================
-   OPEN CHAT
-========================= */
+/* ================= REVIEWS ================= */
 
-function openChat(phone) {
+function loadReviews() {
 
-    activeClient = phone;
+    db.ref("reviews")
+    .on("value", snapshot => {
 
+        const list =
+            document.getElementById("reviewsList");
 
-    document.getElementById("replyInput")
-        .disabled = false;
+        list.innerHTML = "";
 
-    document.getElementById("sendBtn")
-        .disabled = false;
-
-
-    db.ref("chats/" + phone)
-        .once("value")
-        .then(function(snapshot) {
-
-            const client =
-                snapshot.val();
-
-            document.getElementById("chatTitle")
-                .textContent =
-                "Chat: " +
-                (client.name || phone);
-
-        });
-
-
-    db.ref(
-        "chats/" +
-        phone +
-        "/messages"
-    )
-    .on("value", function(snapshot) {
-
-        const box =
-            document.getElementById("messages");
-
-        box.innerHTML = "";
-
+        let count = 0;
 
         if (!snapshot.exists()) {
+
+            list.innerHTML =
+                `<div class="empty">No reviews yet.</div>`;
+
+            document.getElementById("reviewCount")
+                .textContent = "0";
 
             return;
         }
 
+        snapshot.forEach(child => {
 
-        snapshot.forEach(function(child) {
+            count++;
 
-            const msg =
+            const data =
                 child.val();
-
 
             const div =
                 document.createElement("div");
 
+            div.className = "item";
 
-            div.className =
-                "message " +
-                (
-                    msg.sender === "admin"
-                    ? "admin-msg"
-                    : "client-msg"
-                );
+            div.innerHTML = `
 
+                <strong>
+                    ${escapeHtml(data.name || "Anonymous")}
+                </strong>
 
-            div.textContent =
-                msg.text;
+                <p>
+                    ${escapeHtml(data.text || "")}
+                </p>
 
+                <small>
+                    ${data.time ? new Date(data.time).toLocaleString() : ""}
+                </small>
 
-            box.appendChild(div);
+            `;
+
+            list.appendChild(div);
 
         });
 
-
-        box.scrollTop =
-            box.scrollHeight;
+        document.getElementById("reviewCount")
+            .textContent = count;
 
     });
 
 }
 
 
-/* =========================
-   SEND REPLY
-========================= */
+/* ================= CHATS ================= */
 
-function sendReply() {
+function loadChats() {
 
-    if (!activeClient) return;
+    db.ref("chats")
+    .on("value", snapshot => {
 
+        const list =
+            document.getElementById("chatsList");
 
-    const input =
-        document.getElementById("replyInput");
+        list.innerHTML = "";
 
+        let count = 0;
 
-    const text =
-        input.value.trim();
+        if (!snapshot.exists()) {
 
+            list.innerHTML =
+                `<div class="empty">No chats yet.</div>`;
 
-    if (!text) return;
+            document.getElementById("chatCount")
+                .textContent = "0";
 
+            return;
+        }
 
-    db.ref(
-        "chats/" +
-        activeClient +
-        "/messages"
-    )
-    .push({
+        snapshot.forEach(child => {
 
-        sender: "admin",
+            count++;
 
-        text: text,
+            const chatId =
+                child.key;
 
-        time: Date.now()
+            const chat =
+                child.val();
+
+            const div =
+                document.createElement("div");
+
+            div.className = "item";
+
+            div.innerHTML = `
+
+                <strong>
+                    Client: ${escapeHtml(chatId)}
+                </strong>
+
+                <p>
+                    Chat available in database.
+                </p>
+
+                <small>
+                    Messages: ${
+                        chat.messages
+                        ? Object.keys(chat.messages).length
+                        : 0
+                    }
+                </small>
+
+            `;
+
+            list.appendChild(div);
+
+        });
+
+        document.getElementById("chatCount")
+            .textContent = count;
 
     });
-
-
-    input.value = "";
 
 }
 
 
-/* ENTER TO SEND */
+/* ================= SECURITY ================= */
 
-document.getElementById("replyInput")
-.addEventListener("keypress", function(e) {
+function escapeHtml(value) {
 
-    if (e.key === "Enter") {
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
 
-        sendReply();
-
-    }
-
-});
+}
 
 </script>
 
