@@ -7,264 +7,239 @@
 
     <meta
         name="viewport"
-        content="width=device-width, initial-scale=1.0">
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>PixelWorks - Portfolio</title>
 
-    <link rel="stylesheet" href="style.css">
-
     <style>
 
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            background: #090d16;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #080b12;
             color: white;
         }
 
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(8, 11, 18, 0.95);
+            border-bottom: 1px solid #202938;
+            backdrop-filter: blur(10px);
+        }
 
-        .portfolio-page {
-
-            max-width: 650px;
-
+        .nav {
+            max-width: 1200px;
             margin: auto;
+            padding: 18px 20px;
 
-            padding:
-                120px
-                15px
-                50px;
-
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
+        .logo {
+            color: white;
+            text-decoration: none;
+            font-size: 22px;
+            font-weight: 800;
+        }
 
-        .portfolio-heading {
+        .logo span {
+            color: #3b82f6;
+        }
 
+        .nav-links {
+            display: flex;
+            gap: 22px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .nav-links a:hover {
+            color: #60a5fa;
+        }
+
+        .hero {
+            max-width: 900px;
+            margin: auto;
+            padding: 100px 20px 60px;
             text-align: center;
-
-            margin-bottom: 35px;
-
         }
 
-
-        .portfolio-heading h1 {
-
-            font-size: 42px;
-
-            margin-bottom: 10px;
-
+        .hero h1 {
+            font-size: clamp(38px, 7vw, 70px);
+            margin: 0 0 18px;
         }
 
-
-        .portfolio-heading p {
-
-            color: #9ca3af;
-
-            line-height: 1.6;
-
+        .hero h1 span {
+            color: #3b82f6;
         }
 
+        .hero p {
+            color: #94a3b8;
+            font-size: 17px;
+            line-height: 1.7;
+            max-width: 650px;
+            margin: auto;
+        }
 
-        .portfolio-post {
+        .portfolio-section {
+            max-width: 1200px;
+            margin: auto;
+            padding: 30px 20px 100px;
+        }
 
+        .filters {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        .filter-btn {
             background: #111827;
-
-            border:
-                1px solid
-                #1f2937;
-
-            border-radius: 14px;
-
-            overflow: hidden;
-
-            margin-bottom: 30px;
-
+            border: 1px solid #293548;
+            color: #cbd5e1;
+            padding: 10px 16px;
+            border-radius: 999px;
+            cursor: pointer;
         }
 
-
-        /* IMAGE AREA */
-
-        .post-image-container {
-
-            position: relative;
-
-            width: 100%;
-
-            aspect-ratio: 1 / 1;
-
-            background: #05070c;
-
-            overflow: hidden;
-
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: #2563eb;
+            color: white;
+            border-color: #2563eb;
         }
 
+        .projects-grid {
+            display: grid;
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
 
-        .post-image {
+            gap: 25px;
+        }
 
+        .project-card {
+            background: #101621;
+            border: 1px solid #202938;
+            border-radius: 15px;
+            overflow: hidden;
+
+            transition:
+                transform .25s ease,
+                border-color .25s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-6px);
+            border-color: #3b82f6;
+        }
+
+        .project-image {
             width: 100%;
-
-            height: 100%;
-
+            height: 230px;
             object-fit: cover;
-
             display: block;
-
+            background: #151b27;
         }
 
+        .project-content {
+            padding: 22px;
+        }
 
-        /* ARROWS */
+        .project-category {
+            display: inline-block;
+            color: #60a5fa;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 9px;
+        }
 
-        .image-arrow {
+        .project-title {
+            margin: 0 0 10px;
+            font-size: 21px;
+        }
 
-            position: absolute;
+        .project-description {
+            color: #94a3b8;
+            line-height: 1.6;
+            font-size: 14px;
+            min-height: 65px;
+        }
 
-            top: 50%;
+        .view-btn {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 10px 15px;
 
-            transform:
-                translateY(-50%);
-
-            width: 38px;
-
-            height: 38px;
-
-            border-radius: 50%;
-
-            border: none;
-
-            background:
-                rgba(0,0,0,0.65);
-
+            background: #2563eb;
             color: white;
 
-            font-size: 22px;
-
-            cursor: pointer;
-
-        }
-
-
-        .prev {
-
-            left: 12px;
-
-        }
-
-
-        .next {
-
-            right: 12px;
-
-        }
-
-
-        /* DOTS */
-
-        .image-dots {
-
-            position: absolute;
-
-            bottom: 12px;
-
-            left: 0;
-
-            right: 0;
-
-            text-align: center;
-
-        }
-
-
-        .dot {
-
-            display: inline-block;
-
-            width: 7px;
-
-            height: 7px;
-
-            border-radius: 50%;
-
-            background: #6b7280;
-
-            margin: 0 3px;
-
-        }
-
-
-        .dot.active {
-
-            background: #3b82f6;
-
-        }
-
-
-        /* CONTENT */
-
-        .post-content {
-
-            padding: 20px;
-
-        }
-
-
-        .post-title {
-
-            font-size: 21px;
-
-            margin:
-                0
-                0
-                10px;
-
-        }
-
-
-        .post-description {
-
-            color: #9ca3af;
+            text-decoration: none;
+            border-radius: 8px;
 
             font-size: 14px;
-
-            line-height: 1.7;
-
-            margin: 0;
-
-            white-space: pre-wrap;
-
+            font-weight: 700;
         }
 
-
-        .post-date {
-
-            color: #6b7280;
-
-            font-size: 12px;
-
-            margin-top: 15px;
-
+        .view-btn:hover {
+            background: #1d4ed8;
         }
-
 
         .empty {
-
             text-align: center;
+            padding: 60px 20px;
+            color: #64748b;
+        }
 
-            color: #9ca3af;
+        .loader {
+            text-align: center;
+            padding: 60px;
+            color: #60a5fa;
+        }
 
-            padding: 50px 10px;
+        @media(max-width: 900px) {
+
+            .projects-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
 
         }
 
+        @media(max-width: 600px) {
 
-        @media(max-width:600px) {
-
-            .portfolio-heading h1 {
-
-                font-size: 32px;
-
+            .nav {
+                padding: 15px;
             }
 
-            .portfolio-page {
+            .nav-links {
+                gap: 12px;
+            }
 
-                padding-top: 110px;
+            .hero {
+                padding-top: 70px;
+            }
 
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .project-image {
+                height: 210px;
             }
 
         }
@@ -277,108 +252,133 @@
 <body>
 
 
-<!-- HEADER -->
+<!-- ================= NAVBAR ================= -->
 
 <header>
 
-    <div class="nav-container">
+    <div class="nav">
 
-        <a
-            href="index.html"
-            class="logo">
-
-            PixelWorks
-
+        <a href="index.html" class="logo">
+            Pixel<span>Works</span>
         </a>
 
+        <nav class="nav-links">
 
-        <div
-            class="hamburger"
-            id="hamburger">
+            <a href="index.html">
+                Home
+            </a>
 
-            <span></span>
+            <a href="services.html">
+                Services
+            </a>
 
-            <span></span>
+            <a href="portfolio.html">
+                Portfolio
+            </a>
 
-            <span></span>
+            <a href="login.html">
+                Login
+            </a>
 
-        </div>
-
-
-        <ul
-            class="nav-links"
-            id="navLinks">
-
-            <li>
-                <a href="index.html">
-                    Home
-                </a>
-            </li>
-
-            <li>
-                <a href="services.html">
-                    Services
-                </a>
-            </li>
-
-            <li>
-                <a href="portfolio.html">
-                    Portfolio
-                </a>
-            </li>
-
-            <li>
-                <a href="contact.html">
-                    Contact
-                </a>
-            </li>
-
-        </ul>
+        </nav>
 
     </div>
 
 </header>
 
 
-<!-- PORTFOLIO -->
+<!-- ================= HERO ================= -->
 
-<main class="portfolio-page">
+<section class="hero">
+
+    <h1>
+        Our <span>Portfolio</span>
+    </h1>
+
+    <p>
+        Real projects, creative ideas aur modern digital
+        experiences jo humne clients ke liye build kiye hain.
+    </p>
+
+</section>
 
 
-    <div class="portfolio-heading">
+<!-- ================= PORTFOLIO ================= -->
 
-        <h1>
-            Our Work
-        </h1>
+<section class="portfolio-section">
 
-        <p>
-            Real projects. Real designs.
-            Premium digital experiences built
-            for modern businesses.
-        </p>
+
+    <!-- FILTERS -->
+
+    <div class="filters">
+
+        <button
+            class="filter-btn active"
+            data-category="All"
+        >
+            All
+        </button>
+
+        <button
+            class="filter-btn"
+            data-category="Web Development"
+        >
+            Web Development
+        </button>
+
+        <button
+            class="filter-btn"
+            data-category="App Development"
+        >
+            App Development
+        </button>
+
+        <button
+            class="filter-btn"
+            data-category="UI/UX Design"
+        >
+            UI/UX
+        </button>
+
+        <button
+            class="filter-btn"
+            data-category="AI"
+        >
+            AI
+        </button>
+
+        <button
+            class="filter-btn"
+            data-category="Cybersecurity"
+        >
+            Cybersecurity
+        </button>
 
     </div>
 
 
-    <div id="portfolioPosts">
+    <!-- PROJECTS -->
 
-        <div class="empty">
-            Portfolio posts load ho rahi hain...
+    <div
+        id="projectsGrid"
+        class="projects-grid"
+    >
+
+        <div class="loader">
+            Loading portfolio...
         </div>
 
     </div>
 
 
-</main>
+</section>
 
 
-<!-- FIREBASE -->
+<!-- ================= FIREBASE ================= -->
 
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
 
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
-
-<script src="script.js"></script>
 
 
 <script>
@@ -413,330 +413,240 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
+
 const db =
     firebase.database();
 
 
-/* =========================
-   LOAD PORTFOLIO
-========================= */
-
-db.ref("portfolioPosts")
-.on("value", function(snapshot) {
-
-    const container =
-        document.getElementById(
-            "portfolioPosts"
-        );
+const portfolioRef =
+    db.ref("portfolio");
 
 
-    container.innerHTML = "";
+let allProjects = [];
 
 
-    if (!snapshot.exists()) {
+/* ================= LOAD ================= */
 
-        container.innerHTML = `
-            <div class="empty">
-                Abhi portfolio me koi project nahi hai.
-            </div>
-        `;
+portfolioRef.on("value", snapshot => {
 
-        return;
-    }
+    allProjects = [];
 
+    if (snapshot.exists()) {
 
-    const posts = [];
+        snapshot.forEach(child => {
 
+            allProjects.push({
 
-    snapshot.forEach(function(child) {
+                id: child.key,
 
-        posts.push({
+                ...child.val()
 
-            id: child.key,
-
-            ...child.val()
+            });
 
         });
 
+    }
+
+    allProjects.sort((a, b) => {
+
+        return (b.createdAt || 0)
+             - (a.createdAt || 0);
+
     });
 
+    displayProjects("All");
 
-    /* NEWEST FIRST */
+});
 
-    posts.sort(function(a,b) {
 
-        return (
-            (b.createdAt || 0) -
-            (a.createdAt || 0)
+/* ================= DISPLAY ================= */
+
+function displayProjects(category) {
+
+    const grid =
+        document.getElementById("projectsGrid");
+
+    grid.innerHTML = "";
+
+
+    let projects =
+        allProjects;
+
+
+    if (category !== "All") {
+
+        projects =
+            allProjects.filter(project => {
+
+                return project.category === category;
+
+            });
+
+    }
+
+
+    if (projects.length === 0) {
+
+        grid.innerHTML = `
+
+            <div
+                class="empty"
+                style="grid-column:1/-1;"
+            >
+
+                <h3>No projects found</h3>
+
+                <p>
+                    Is category mein abhi koi project available nahi hai.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    projects.forEach(project => {
+
+        const card =
+            document.createElement("article");
+
+        card.className =
+            "project-card";
+
+
+        const image =
+            escapeHtml(project.image || "");
+
+
+        const title =
+            escapeHtml(
+                project.title || "Untitled Project"
+            );
+
+
+        const categoryText =
+            escapeHtml(
+                project.category || "Other"
+            );
+
+
+        const description =
+            escapeHtml(
+                project.description || ""
+            );
+
+
+        card.innerHTML = `
+
+            <img
+                class="project-image"
+                src="${image}"
+                alt="${title}"
+                loading="lazy"
+                onerror="
+                    this.src='data:image/svg+xml;charset=UTF-8,${encodeURIComponent(
+                        '<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500"><rect width="100%" height="100%" fill="#151b27"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#64748b" font-size="24">PixelWorks</text></svg>'
+                    )}'
+                "
+            >
+
+            <div class="project-content">
+
+                <span class="project-category">
+                    ${categoryText}
+                </span>
+
+                <h2 class="project-title">
+                    ${title}
+                </h2>
+
+                <p class="project-description">
+                    ${description}
+                </p>
+
+                ${
+                    project.link
+                    ?
+                    `
+                    <a
+                        href="${escapeHtml(project.link)}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="view-btn"
+                    >
+                        View Project →
+                    </a>
+                    `
+                    :
+                    ""
+                }
+
+            </div>
+
+        `;
+
+
+        grid.appendChild(card);
+
+    });
+
+}
+
+
+/* ================= FILTER ================= */
+
+document
+.querySelectorAll(".filter-btn")
+.forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        document
+        .querySelectorAll(".filter-btn")
+        .forEach(btn => {
+
+            btn.classList.remove("active");
+
+        });
+
+
+        button.classList.add("active");
+
+
+        displayProjects(
+            button.dataset.category
         );
-
-    });
-
-
-    posts.forEach(function(post) {
-
-        createPost(post, container);
 
     });
 
 });
 
 
-/* =========================
-   CREATE POST
-========================= */
+/* ================= SECURITY ================= */
 
-function createPost(post, container) {
+function escapeHtml(value) {
 
-    const postElement =
-        document.createElement("article");
+    return String(value)
 
+        .replace(/&/g, "&amp;")
 
-    postElement.className =
-        "portfolio-post";
+        .replace(/</g, "&lt;")
 
+        .replace(/>/g, "&gt;")
 
-    const imageContainer =
-        document.createElement("div");
+        .replace(/"/g, "&quot;")
 
-
-    imageContainer.className =
-        "post-image-container";
-
-
-    const images =
-        Array.isArray(post.images)
-        ? post.images
-        : Object.values(post.images || {});
-
-
-    let currentIndex = 0;
-
-
-    const image =
-        document.createElement("img");
-
-
-    image.className =
-        "post-image";
-
-
-    image.alt =
-        post.title || "Portfolio project";
-
-
-    image.src =
-        images[0] || "";
-
-
-    imageContainer.appendChild(image);
-
-
-    /* =================
-       ARROWS
-    ================= */
-
-    if (images.length > 1) {
-
-        const prev =
-            document.createElement("button");
-
-        prev.className =
-            "image-arrow prev";
-
-        prev.textContent =
-            "‹";
-
-
-        const next =
-            document.createElement("button");
-
-        next.className =
-            "image-arrow next";
-
-        next.textContent =
-            "›";
-
-
-        imageContainer.appendChild(prev);
-
-        imageContainer.appendChild(next);
-
-
-        /* DOTS */
-
-        const dots =
-            document.createElement("div");
-
-        dots.className =
-            "image-dots";
-
-
-        images.forEach(function(_, index) {
-
-            const dot =
-                document.createElement("span");
-
-            dot.className =
-                "dot" +
-                (index === 0
-                    ? " active"
-                    : "");
-
-            dots.appendChild(dot);
-
-        });
-
-
-        imageContainer.appendChild(dots);
-
-
-        function updateImage() {
-
-            image.src =
-                images[currentIndex];
-
-
-            const allDots =
-                dots.querySelectorAll(".dot");
-
-
-            allDots.forEach(function(dot, index) {
-
-                dot.classList.toggle(
-                    "active",
-                    index === currentIndex
-                );
-
-            });
-
-        }
-
-
-        prev.onclick = function() {
-
-            currentIndex--;
-
-            if (currentIndex < 0) {
-
-                currentIndex =
-                    images.length - 1;
-
-            }
-
-            updateImage();
-
-        };
-
-
-        next.onclick = function() {
-
-            currentIndex++;
-
-            if (
-                currentIndex >=
-                images.length
-            ) {
-
-                currentIndex = 0;
-
-            }
-
-            updateImage();
-
-        };
-
-    }
-
-
-    /* =================
-       CONTENT
-    ================= */
-
-    const content =
-        document.createElement("div");
-
-
-    content.className =
-        "post-content";
-
-
-    const title =
-        document.createElement("h2");
-
-
-    title.className =
-        "post-title";
-
-
-    title.textContent =
-        post.title || "Untitled Project";
-
-
-    const description =
-        document.createElement("p");
-
-
-    description.className =
-        "post-description";
-
-
-    description.textContent =
-        post.description || "";
-
-
-    content.appendChild(title);
-
-    content.appendChild(description);
-
-
-    /* DATE */
-
-    if (post.createdAt) {
-
-        const date =
-            document.createElement("div");
-
-
-        date.className =
-            "post-date";
-
-
-        date.textContent =
-            new Date(
-                post.createdAt
-            ).toLocaleDateString(
-                "en-IN",
-                {
-                    day: "numeric",
-                    month: "short",
-                    year: "numeric"
-                }
-            );
-
-
-        content.appendChild(date);
-
-    }
-
-
-    postElement.appendChild(
-        imageContainer
-    );
-
-
-    postElement.appendChild(
-        content
-    );
-
-
-    container.appendChild(
-        postElement
-    );
+        .replace(/'/g, "&#039;");
 
 }
 
 </script>
 
+
 </body>
+
 </html>
