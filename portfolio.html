@@ -2,184 +2,999 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
-  <title>Portfolio | PixelWorks</title>
+    <title>Portfolio | PixelWorks</title>
 
-  <link rel="stylesheet" href="portfolio.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #070b14;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .portfolio-header {
+            height: 70px;
+
+            padding: 0 7%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            background: rgba(7, 11, 20, 0.92);
+
+            border-bottom: 1px solid #1c2638;
+
+            position: sticky;
+            top: 0;
+
+            z-index: 100;
+
+            backdrop-filter: blur(15px);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+
+            color: #4d8dff;
+
+            text-decoration: none;
+
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .verified-badge {
+            width: 17px;
+            height: 17px;
+
+            object-fit: contain;
+        }
+
+        .back-btn {
+            color: #c8cfdd;
+
+            text-decoration: none;
+
+            padding: 9px 15px;
+
+            border: 1px solid #303b50;
+
+            border-radius: 8px;
+
+            transition: 0.2s;
+        }
+
+        .back-btn:hover {
+            border-color: #3b82f6;
+            color: #fff;
+        }
+
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .portfolio {
+            width: min(100% - 30px, 700px);
+
+            margin: auto;
+        }
+
+
+        /* =========================
+           INTRO
+        ========================= */
+
+        .portfolio-intro {
+            text-align: center;
+
+            padding: 75px 10px 50px;
+        }
+
+        .small-title {
+            color: #4d8dff;
+
+            font-size: 12px;
+
+            letter-spacing: 3px;
+
+            font-weight: bold;
+
+            margin-bottom: 15px;
+        }
+
+        .portfolio-intro h1 {
+            font-size: clamp(42px, 8vw, 68px);
+
+            line-height: 1;
+
+            margin-bottom: 20px;
+        }
+
+        .portfolio-intro h1 span {
+            color: #4d8dff;
+        }
+
+        .portfolio-intro p:last-child {
+            max-width: 540px;
+
+            margin: auto;
+
+            color: #8992a5;
+
+            line-height: 1.7;
+        }
+
+
+        /* =========================
+           STATUS
+        ========================= */
+
+        .status {
+            text-align: center;
+
+            color: #8d96a8;
+
+            padding: 30px;
+        }
+
+
+        /* =========================
+           POST
+        ========================= */
+
+        .portfolio-post {
+            background: #0d1320;
+
+            border: 1px solid #1c2638;
+
+            border-radius: 18px;
+
+            overflow: hidden;
+
+            margin-bottom: 45px;
+
+            box-shadow:
+                0 15px 40px rgba(0, 0, 0, 0.25);
+        }
+
+
+        /* =========================
+           POST HEADER
+        ========================= */
+
+        .post-top {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            padding: 16px 18px;
+        }
+
+        .profile-icon {
+            width: 42px;
+            height: 42px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: #2563eb;
+
+            font-weight: bold;
+        }
+
+        .post-name {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 3px;
+        }
+
+        .verified-name {
+            display: flex;
+
+            align-items: center;
+
+            gap: 5px;
+        }
+
+        .verified-name strong {
+            font-size: 15px;
+        }
+
+        .verified-name img {
+            width: 16px;
+            height: 16px;
+
+            object-fit: contain;
+        }
+
+        .post-name small {
+            color: #727c90;
+
+            font-size: 12px;
+        }
+
+
+        /* =========================
+           IMAGES
+        ========================= */
+
+        .post-images {
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 3px;
+
+            background: #05070c;
+        }
+
+        .post-images.single-image {
+            grid-template-columns: 1fr;
+        }
+
+        .post-images img {
+            width: 100%;
+
+            height: 300px;
+
+            display: block;
+
+            object-fit: cover;
+
+            cursor: pointer;
+        }
+
+        .post-images.single-image img {
+            height: auto;
+
+            max-height: 650px;
+        }
+
+
+        /* =========================
+           POST CONTENT
+        ========================= */
+
+        .post-content {
+            padding: 24px;
+        }
+
+        .post-content h2 {
+            font-size: 23px;
+
+            margin-bottom: 10px;
+        }
+
+        .post-description {
+            color: #8d96a8;
+
+            line-height: 1.7;
+
+            margin-bottom: 18px;
+
+            white-space: pre-wrap;
+        }
+
+
+        /* =========================
+           TAGS
+        ========================= */
+
+        .tags {
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 8px;
+        }
+
+        .tags span {
+            color: #62a0ff;
+
+            font-size: 13px;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            padding: 50px 7%;
+
+            margin-top: 70px;
+
+            border-top: 1px solid #182033;
+
+            text-align: center;
+        }
+
+        footer strong {
+            color: #4d8dff;
+        }
+
+        footer p {
+            color: #606a7c;
+
+            margin-top: 10px;
+
+            font-size: 13px;
+        }
+
+
+        /* =========================
+           IMAGE MODAL
+        ========================= */
+
+        .image-modal {
+            display: none;
+
+            position: fixed;
+
+            inset: 0;
+
+            background: rgba(0, 0, 0, 0.92);
+
+            z-index: 999;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+        }
+
+        .image-modal.active {
+            display: flex;
+        }
+
+        .image-modal img {
+            max-width: 95vw;
+            max-height: 90vh;
+
+            object-fit: contain;
+
+            border-radius: 8px;
+        }
+
+        .close-modal {
+            position: absolute;
+
+            top: 20px;
+            right: 25px;
+
+            font-size: 32px;
+
+            color: white;
+
+            cursor: pointer;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            .portfolio-header {
+                padding: 0 5%;
+            }
+
+            .portfolio {
+                width: calc(100% - 20px);
+            }
+
+            .portfolio-intro {
+                padding: 60px 10px 40px;
+            }
+
+            .portfolio-intro h1 {
+                font-size: 43px;
+            }
+
+            .post-images {
+                grid-template-columns: 1fr;
+            }
+
+            .post-images img {
+                height: auto;
+
+                max-height: 500px;
+            }
+
+            .post-content {
+                padding: 20px;
+            }
+
+            .post-content h2 {
+                font-size: 20px;
+            }
+
+            .brand {
+                font-size: 19px;
+            }
+
+            .back-btn {
+                font-size: 13px;
+
+                padding: 8px 11px;
+            }
+        }
+    </style>
 </head>
+
 
 <body>
 
-  <!-- NAVBAR -->
 
-  <header class="portfolio-header">
+    <!-- =========================
+         HEADER
+    ========================= -->
 
-    <a href="index.html" class="brand">
-      PixelWorks
-    </a>
+    <header class="portfolio-header">
 
-    <a href="index.html" class="back-btn">
-      ← Home
-    </a>
+        <a
+            href="index.html"
+            class="brand">
 
-  </header>
+            PixelWorks
+
+            <img
+                src="verified.png"
+                class="verified-badge"
+                alt="Verified">
+
+        </a>
 
 
-  <!-- PORTFOLIO -->
+        <a
+            href="index.html"
+            class="back-btn">
 
-  <main class="portfolio">
+            ← Home
 
-    <div class="portfolio-intro">
+        </a>
 
-      <p class="small-title">
-        OUR WORK
-      </p>
+    </header>
 
-      <h1>
-        Projects we've
-        <span>built.</span>
-      </h1>
 
-      <p>
-        A collection of websites, interfaces and digital
-        experiences created for businesses and brands.
-      </p>
+    <!-- =========================
+         MAIN
+    ========================= -->
+
+    <main class="portfolio">
+
+
+        <!-- INTRO -->
+
+        <section class="portfolio-intro">
+
+            <p class="small-title">
+                OUR WORK
+            </p>
+
+            <h1>
+                Projects we've
+                <span>built.</span>
+            </h1>
+
+            <p>
+                A collection of websites, interfaces and
+                digital experiences created for businesses
+                and brands.
+            </p>
+
+        </section>
+
+
+        <!-- =========================
+             FIREBASE POSTS
+        ========================= -->
+
+        <section id="portfolioContainer">
+
+            <div class="status">
+                Loading projects...
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- =========================
+         IMAGE MODAL
+    ========================= -->
+
+    <div
+        id="imageModal"
+        class="image-modal">
+
+        <span
+            class="close-modal"
+            onclick="closeImage()">
+
+            ×
+
+        </span>
+
+        <img
+            id="modalImage"
+            src=""
+            alt="Project">
 
     </div>
 
 
-    <!-- POST 1 -->
+    <!-- =========================
+         FOOTER
+    ========================= -->
 
-    <article class="portfolio-post">
+    <footer>
 
-      <div class="post-top">
-
-        <div class="profile-icon">
-          P
-        </div>
-
-        <div>
-          <strong>PixelWorks</strong>
-          <small>Web Development</small>
-        </div>
-
-      </div>
-
-
-      <!-- MULTIPLE IMAGES -->
-
-      <div class="post-images">
-
-        <img
-          src="images/project1-1.jpg"
-          alt="Project preview">
-
-        <img
-          src="images/project1-2.jpg"
-          alt="Project preview">
-
-        <img
-          src="images/project1-3.jpg"
-          alt="Project preview">
-
-      </div>
-
-
-      <!-- POST CONTENT -->
-
-      <div class="post-content">
-
-        <h2>
-          Modern Business Website
-        </h2>
+        <strong>
+            PixelWorks
+        </strong>
 
         <p>
-          A premium, responsive website designed for a
-          modern business to improve its online presence
-          and attract more customers.
+            © 2026 PixelWorks. All rights reserved.
         </p>
 
-        <div class="tags">
-          <span>#WebDevelopment</span>
-          <span>#UIUX</span>
-          <span>#Responsive</span>
-        </div>
-
-      </div>
-
-    </article>
+    </footer>
 
 
-    <!-- POST 2 -->
 
-    <article class="portfolio-post">
+    <!-- =========================
+         FIREBASE
+    ========================= -->
 
-      <div class="post-top">
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
 
-        <div class="profile-icon">
-          P
-        </div>
-
-        <div>
-          <strong>PixelWorks</strong>
-          <small>UI/UX Design</small>
-        </div>
-
-      </div>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
 
 
-      <div class="post-images">
+    <script>
 
-        <img
-          src="images/project2-1.jpg"
-          alt="Project preview">
+        /* ==================================
+           FIREBASE CONFIG
+        ================================== */
 
-        <img
-          src="images/project2-2.jpg"
-          alt="Project preview">
+        const firebaseConfig = {
 
-      </div>
+            apiKey:
+                "AIzaSyBPFYE7EUeDJHpTKvBjY6ybHTj-85OYZFY",
 
+            authDomain:
+                "pixelworks-agency.firebaseapp.com",
 
-      <div class="post-content">
+            databaseURL:
+                "https://pixelworks-agency-default-rtdb.asia-southeast1.firebasedatabase.app",
 
-        <h2>
-          Premium Fitness Website
-        </h2>
+            projectId:
+                "pixelworks-agency",
 
-        <p>
-          A clean and powerful fitness website focused
-          on converting visitors into potential clients.
-        </p>
+            storageBucket:
+                "pixelworks-agency.firebasestorage.app",
 
-        <div class="tags">
-          <span>#Fitness</span>
-          <span>#UIUX</span>
-          <span>#WebDesign</span>
-        </div>
+            messagingSenderId:
+                "265457916349",
 
-      </div>
+            appId:
+                "1:265457916349:web:1f2f903ed3eaf858c51ad4",
 
-    </article>
+            measurementId:
+                "G-21TVP274BD"
 
-
-  </main>
+        };
 
 
-  <footer>
+        firebase.initializeApp(
+            firebaseConfig
+        );
 
-    <strong>PixelWorks</strong>
 
-    <p>
-      © 2026 PixelWorks. All rights reserved.
-    </p>
+        const database =
+            firebase.database();
 
-  </footer>
+
+
+        /* ==================================
+           LOAD PORTFOLIO
+        ================================== */
+
+        const portfolioContainer =
+            document.getElementById(
+                "portfolioContainer"
+            );
+
+
+        database
+            .ref("portfolio")
+            .orderByChild("createdAt")
+            .on(
+                "value",
+                function(snapshot) {
+
+                    portfolioContainer.innerHTML = "";
+
+
+                    /* NO POSTS */
+
+                    if (!snapshot.exists()) {
+
+                        portfolioContainer.innerHTML = `
+
+                            <div class="status">
+
+                                Abhi koi project
+                                publish nahi hua.
+
+                            </div>
+
+                        `;
+
+                        return;
+                    }
+
+
+                    const posts = [];
+
+
+                    /* FIREBASE DATA */
+
+                    snapshot.forEach(
+                        function(child) {
+
+                            posts.push({
+
+                                id: child.key,
+
+                                ...child.val()
+
+                            });
+
+                        }
+                    );
+
+
+                    /* NEWEST FIRST */
+
+                    posts.reverse();
+
+
+                    /* CREATE POSTS */
+
+                    posts.forEach(
+                        function(post) {
+
+                            createPost(post);
+
+                        }
+                    );
+
+                },
+                function(error) {
+
+                    console.error(error);
+
+
+                    portfolioContainer.innerHTML = `
+
+                        <div class="status">
+
+                            Projects load nahi ho pa rahe.
+                            Thodi der baad try karein.
+
+                        </div>
+
+                    `;
+
+                }
+            );
+
+
+
+        /* ==================================
+           CREATE POST
+        ================================== */
+
+        function createPost(post) {
+
+            const article =
+                document.createElement(
+                    "article"
+                );
+
+
+            article.className =
+                "portfolio-post";
+
+
+            /* ==============================
+               IMAGES
+            ============================== */
+
+            const images =
+                Array.isArray(post.images)
+                    ? post.images
+                    : [];
+
+
+            let imagesHTML = "";
+
+
+            images.forEach(
+                function(url) {
+
+                    imagesHTML += `
+
+                        <img
+                            src="${escapeHTML(url)}"
+                            alt="${escapeHTML(
+                                post.title || "Project"
+                            )}"
+                            onclick="openImage(this.src)"
+                            loading="lazy">
+
+                    `;
+
+                }
+            );
+
+
+            const imageClass =
+                images.length === 1
+                    ? "post-images single-image"
+                    : "post-images";
+
+
+
+            /* ==============================
+               TAGS
+            ============================== */
+
+            let tagsHTML = "";
+
+
+            const tags =
+                Array.isArray(post.tags)
+                    ? post.tags
+                    : [];
+
+
+            tags.forEach(
+                function(tag) {
+
+                    tagsHTML += `
+
+                        <span>
+                            #${escapeHTML(tag)}
+                        </span>
+
+                    `;
+
+                }
+            );
+
+
+
+            /* ==============================
+               POST HTML
+            ============================== */
+
+            article.innerHTML = `
+
+                <div class="post-top">
+
+                    <div class="profile-icon">
+                        P
+                    </div>
+
+
+                    <div class="post-name">
+
+                        <div class="verified-name">
+
+                            <strong>
+                                PixelWorks
+                            </strong>
+
+                            <img
+                                src="verified.png"
+                                alt="Verified">
+
+                        </div>
+
+
+                        <small>
+                            Web Development
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="${imageClass}">
+
+                    ${imagesHTML}
+
+                </div>
+
+
+                <div class="post-content">
+
+                    <h2>
+                        ${escapeHTML(
+                            post.title || ""
+                        )}
+                    </h2>
+
+
+                    <p class="post-description">
+
+                        ${escapeHTML(
+                            post.description || ""
+                        )}
+
+                    </p>
+
+
+                    <div class="tags">
+
+                        ${tagsHTML}
+
+                    </div>
+
+                </div>
+
+            `;
+
+
+            portfolioContainer.appendChild(
+                article
+            );
+
+        }
+
+
+
+        /* ==================================
+           SECURITY — ESCAPE HTML
+        ================================== */
+
+        function escapeHTML(value) {
+
+            return String(value)
+
+                .replaceAll(
+                    "&",
+                    "&amp;"
+                )
+
+                .replaceAll(
+                    "<",
+                    "&lt;"
+                )
+
+                .replaceAll(
+                    ">",
+                    "&gt;"
+                )
+
+                .replaceAll(
+                    '"',
+                    "&quot;"
+                )
+
+                .replaceAll(
+                    "'",
+                    "&#039;"
+                );
+
+        }
+
+
+
+        /* ==================================
+           IMAGE MODAL
+        ================================== */
+
+        function openImage(url) {
+
+            document
+                .getElementById("modalImage")
+                .src = url;
+
+
+            document
+                .getElementById("imageModal")
+                .classList.add("active");
+
+        }
+
+
+        function closeImage() {
+
+            document
+                .getElementById("imageModal")
+                .classList.remove("active");
+
+
+            document
+                .getElementById("modalImage")
+                .src = "";
+
+        }
+
+
+        /* CLICK OUTSIDE IMAGE */
+
+        document
+            .getElementById("imageModal")
+            .addEventListener(
+                "click",
+                function(e) {
+
+                    if (
+                        e.target ===
+                        this
+                    ) {
+
+                        closeImage();
+
+                    }
+
+                }
+            );
+
+
+        /* ESC KEY */
+
+        document.addEventListener(
+            "keydown",
+            function(e) {
+
+                if (
+                    e.key === "Escape"
+                ) {
+
+                    closeImage();
+
+                }
+
+            }
+        );
+
+    </script>
 
 </body>
 
