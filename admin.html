@@ -2,6 +2,7 @@
 <html lang="hi">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta
@@ -11,435 +12,238 @@
     <title>PixelWorks - Admin Dashboard</title>
 
     <style>
+
         * {
             box-sizing: border-box;
         }
 
         body {
-            background: #090d16;
+            background-color: #090d16;
             color: #fff;
             margin: 0;
-            font-family: Arial, sans-serif;
+            padding: 0;
+            font-family:
+                'Segoe UI',
+                Tahoma,
+                Geneva,
+                Verdana,
+                sans-serif;
         }
 
         .page-wrapper {
             max-width: 1200px;
-            margin: auto;
+            margin: 0 auto;
             padding: 20px;
             min-height: 100vh;
         }
-
-        /* HEADER */
 
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-
             padding: 15px 20px;
-
             background: #111827;
             border: 1px solid #1f2937;
-            border-radius: 12px;
-
+            border-radius: 10px;
             margin-bottom: 20px;
         }
-
-        .header h2 {
-            margin: 0;
-            font-size: 20px;
-            color: #60a5fa;
-        }
-
-        /* LOGIN */
 
         .login-box {
             max-width: 400px;
             margin: 80px auto;
-
             padding: 30px;
-
             background: #111827;
             border: 1px solid #1f2937;
-            border-radius: 15px;
-
+            border-radius: 12px;
             text-align: center;
         }
 
-        .input-field {
-            width: 100%;
-
-            padding: 12px;
-
-            background: #090d16;
-            border: 1px solid #374151;
-
-            border-radius: 8px;
-
-            color: white;
-
-            margin-bottom: 12px;
-            outline: none;
-        }
-
-        .input-field:focus {
-            border-color: #3b82f6;
-        }
-
-        textarea.input-field {
-            min-height: 120px;
-            resize: vertical;
-        }
-
-        .btn-main {
-            width: 100%;
-
-            padding: 12px;
-
-            background: #3b82f6;
-
-            border: none;
-            border-radius: 8px;
-
-            color: white;
-
-            font-weight: 600;
-
-            cursor: pointer;
-        }
-
-        .btn-main:hover {
-            background: #2563eb;
-        }
-
-        .logout-btn {
-            background: #ef4444;
-            border: none;
-
-            color: white;
-
-            padding: 8px 14px;
-
-            border-radius: 7px;
-
-            cursor: pointer;
-        }
-
-        /* DASHBOARD */
-
         .dashboard {
             display: none;
+        }
 
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 280px 1fr;
             gap: 20px;
         }
 
-        .sidebar {
-            width: 280px;
-
+        .sidebar,
+        .main-area {
             background: #111827;
-
             border: 1px solid #1f2937;
+            border-radius: 10px;
+            padding: 18px;
+        }
 
-            border-radius: 12px;
-
-            padding: 15px;
-
-            height: calc(100vh - 130px);
-
-            overflow-y: auto;
+        .sidebar {
+            min-height: 600px;
         }
 
         .main-area {
-            flex: 1;
-
-            background: #111827;
-
-            border: 1px solid #1f2937;
-
-            border-radius: 12px;
-
-            padding: 20px;
-
-            min-width: 0;
+            min-height: 600px;
         }
-
-        /* SIDEBAR */
-
-        .menu-btn {
-            width: 100%;
-
-            padding: 12px;
-
-            margin-bottom: 8px;
-
-            border: 1px solid #374151;
-
-            background: #090d16;
-
-            color: white;
-
-            border-radius: 8px;
-
-            cursor: pointer;
-
-            text-align: left;
-        }
-
-        .menu-btn:hover,
-        .menu-btn.active {
-            border-color: #3b82f6;
-            background: #172033;
-        }
-
-        /* CLIENTS */
 
         .client-item {
             padding: 12px;
-
             background: #090d16;
-
             border: 1px solid #374151;
-
             border-radius: 8px;
-
             cursor: pointer;
-
             margin-bottom: 8px;
         }
 
         .client-item:hover,
         .client-item.active {
             border-color: #3b82f6;
+            background: #1f2937;
         }
 
-        /* SECTIONS */
-
-        .admin-section {
-            display: none;
-        }
-
-        .admin-section.active {
-            display: block;
-        }
-
-        /* PORTFOLIO */
-
-        .portfolio-form {
-            background: #090d16;
-
-            border: 1px solid #374151;
-
-            border-radius: 12px;
-
-            padding: 20px;
-
-            margin-bottom: 25px;
-        }
-
-        .portfolio-form h3 {
-            margin-top: 0;
-        }
-
-        .file-input {
+        .input-field {
             width: 100%;
-
             padding: 12px;
-
-            border: 1px dashed #4b5563;
-
-            border-radius: 8px;
-
-            background: #111827;
-
-            color: #aaa;
-
-            margin-bottom: 15px;
-        }
-
-        .image-preview {
-            display: grid;
-
-            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-
-            gap: 10px;
-
-            margin-bottom: 15px;
-        }
-
-        .image-preview img {
-            width: 100%;
-            height: 100px;
-
-            object-fit: cover;
-
-            border-radius: 8px;
-
-            border: 1px solid #374151;
-        }
-
-        .post-card {
             background: #090d16;
-
             border: 1px solid #374151;
-
-            border-radius: 12px;
-
-            padding: 15px;
-
-            margin-bottom: 15px;
+            border-radius: 8px;
+            color: #fff;
+            margin-bottom: 12px;
         }
 
-        .post-images {
-            display: grid;
-
-            grid-template-columns: repeat(3, 1fr);
-
-            gap: 5px;
-
-            margin: 12px 0;
-        }
-
-        .post-images img {
+        .btn-main {
             width: 100%;
-            height: 120px;
-
-            object-fit: cover;
-
-            border-radius: 6px;
-        }
-
-        .tag {
-            display: inline-block;
-
-            color: #60a5fa;
-
-            font-size: 13px;
-
-            margin-right: 8px;
-        }
-
-        .delete-btn {
-            background: #dc2626;
-
+            padding: 12px;
+            background: #3b82f6;
             border: none;
-
-            color: white;
-
-            padding: 8px 12px;
-
-            border-radius: 7px;
-
+            border-radius: 8px;
+            color: #fff;
+            font-weight: 600;
             cursor: pointer;
         }
 
-        /* CHAT */
-
-        .chat-layout {
-            display: flex;
-            gap: 15px;
+        .btn-main:hover {
+            opacity: .9;
         }
 
-        .chat-clients {
-            width: 250px;
-
-            max-height: 600px;
-
-            overflow-y: auto;
-        }
-
-        .chat-box {
-            flex: 1;
-
-            min-width: 0;
-
-            background: #090d16;
-
-            border: 1px solid #374151;
-
-            border-radius: 10px;
-
-            padding: 15px;
+        .btn-danger {
+            background: #ef4444;
+            border: none;
+            color: white;
+            padding: 8px 14px;
+            border-radius: 6px;
+            cursor: pointer;
         }
 
         .messages-box {
-            height: 450px;
-
+            height: 400px;
             overflow-y: auto;
-
-            display: flex;
-
-            flex-direction: column;
-
-            gap: 10px;
-
             padding: 15px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
 
         .msg-bubble {
             padding: 10px 14px;
-
             border-radius: 10px;
-
             max-width: 75%;
-
             font-size: 13px;
-
             white-space: pre-wrap;
         }
 
-        .chat-input {
-            display: flex;
-
-            gap: 10px;
-
-            border-top: 1px solid #374151;
-
-            padding-top: 12px;
+        .section-box {
+            background: #090d16;
+            border: 1px solid #374151;
+            border-radius: 10px;
+            padding: 18px;
+            margin-bottom: 20px;
         }
 
-        /* MOBILE */
+        .section-box h3 {
+            margin-top: 0;
+        }
 
-        @media(max-width: 750px) {
+        .preview {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 10px 0;
+        }
 
-            .dashboard {
-                flex-direction: column;
+        .preview img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid #374151;
+        }
+
+        .portfolio-post {
+            background: #090d16;
+            border: 1px solid #374151;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 12px;
+        }
+
+        .portfolio-images {
+            display: grid;
+            grid-template-columns:
+                repeat(auto-fill, minmax(120px, 1fr));
+            gap: 8px;
+            margin: 12px 0;
+        }
+
+        .portfolio-images img {
+            width: 100%;
+            height: 130px;
+            object-fit: cover;
+            border-radius: 7px;
+        }
+
+        @media (max-width: 800px) {
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
             }
 
             .sidebar {
-                width: 100%;
-                height: auto;
+                min-height: auto;
             }
 
-            .chat-layout {
-                flex-direction: column;
+            .messages-box {
+                height: 350px;
             }
 
-            .chat-clients {
-                width: 100%;
-            }
-
-            .post-images {
-                grid-template-columns: repeat(2, 1fr);
-            }
         }
+
     </style>
+
 </head>
+
 
 <body>
 
+
 <div class="page-wrapper">
 
-    <!-- HEADER -->
 
-    <header class="header">
+    <div class="header">
 
-        <h2>
+        <h2
+            style="
+                margin: 0;
+                font-size: 20px;
+                color: #60a5fa;
+            ">
+
             PixelWorks Admin Portal
+
         </h2>
+
 
         <button
             id="logoutBtn"
-            class="logout-btn"
+            class="btn-danger"
             style="display:none;"
             onclick="logoutAdmin()">
 
@@ -447,12 +251,13 @@
 
         </button>
 
-    </header>
+    </div>
+
 
 
     <!-- LOGIN -->
 
-    <section
+    <div
         id="loginSection"
         class="login-box">
 
@@ -460,265 +265,242 @@
             Founder Login
         </h3>
 
-        <p style="color:#9ca3af;font-size:13px;">
-            Admin account se login karein.
-        </p>
 
-        <form onsubmit="handleLogin(event)">
+        <input
+            type="email"
+            id="adminEmail"
+            class="input-field"
+            placeholder="Admin Email">
 
-            <input
-                type="email"
-                id="emailInput"
-                class="input-field"
-                placeholder="Admin Email"
-                required>
 
-            <input
-                type="password"
-                id="passInput"
-                class="input-field"
-                placeholder="Password"
-                required>
+        <input
+            type="password"
+            id="adminPassword"
+            class="input-field"
+            placeholder="Admin Password">
 
-            <button
-                type="submit"
-                class="btn-main">
 
-                Login
+        <button
+            id="adminLoginBtn"
+            class="btn-main"
+            onclick="loginAdmin()">
 
-            </button>
+            Login
 
-        </form>
+        </button>
+
 
         <p
-            id="errorMsg"
-            style="display:none;color:#ef4444;font-size:13px;">
+            id="loginError"
+            style="
+                display:none;
+                color:#ef4444;
+                font-size:13px;
+            ">
+
         </p>
 
-    </section>
+    </div>
+
 
 
     <!-- DASHBOARD -->
 
-    <section
+    <div
         id="dashboardSection"
         class="dashboard">
 
-        <!-- SIDEBAR -->
 
-        <aside class="sidebar">
-
-            <button
-                class="menu-btn active"
-                onclick="showSection('portfolioSection', this)">
-
-                📁 Portfolio Manager
-
-            </button>
-
-            <button
-                class="menu-btn"
-                onclick="showSection('chatSection', this)">
-
-                💬 Client Chats
-
-            </button>
-
-        </aside>
+        <div class="dashboard-grid">
 
 
-        <!-- MAIN -->
+            <!-- SIDEBAR -->
 
-        <main class="main-area">
+            <div class="sidebar">
 
-
-            <!-- ========================= -->
-            <!-- PORTFOLIO SECTION -->
-            <!-- ========================= -->
-
-            <section
-                id="portfolioSection"
-                class="admin-section active">
-
-                <h2>
-                    Portfolio Manager
-                </h2>
-
-                <p style="color:#9ca3af;">
-                    Yahin se portfolio me naye projects publish karein.
-                </p>
+                <h4>
+                    Clients
+                </h4>
 
 
-                <!-- CREATE POST -->
+                <div
+                    id="sidebarClients">
 
-                <div class="portfolio-form">
+                    <p
+                        style="color:#9ca3af;">
+
+                        Loading...
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- MAIN -->
+
+            <div class="main-area">
+
+
+                <!-- CHAT -->
+
+                <div class="section-box">
 
                     <h3>
-                        Create New Post
+                        Client Chat
+                    </h3>
+
+
+                    <div
+                        id="chatHeaderTitle"
+                        style="
+                            color:#60a5fa;
+                            margin-bottom:10px;
+                        ">
+
+                        Koi client select karein
+
+                    </div>
+
+
+                    <div
+                        id="messagesContainer"
+                        class="messages-box">
+
+                        <p
+                            style="
+                                color:#9ca3af;
+                                text-align:center;
+                            ">
+
+                            Left menu se client select karein.
+
+                        </p>
+
+                    </div>
+
+
+                    <div
+                        style="
+                            display:flex;
+                            gap:10px;
+                        ">
+
+                        <input
+                            type="text"
+                            id="replyInput"
+                            class="input-field"
+                            placeholder="Reply type karein..."
+                            disabled
+                            style="margin:0;">
+
+
+                        <button
+                            id="sendReplyBtn"
+                            class="btn-main"
+                            disabled
+                            onclick="sendReply()"
+                            style="width:auto;">
+
+                            Send
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- PORTFOLIO -->
+
+                <div class="section-box">
+
+                    <h3>
+                        Portfolio Manager
                     </h3>
 
 
                     <input
                         type="text"
-                        id="postTitle"
+                        id="portfolioTitle"
                         class="input-field"
-                        placeholder="Project Title"
-                        required>
+                        placeholder="Post title">
 
 
                     <textarea
-                        id="postDescription"
+                        id="portfolioCaption"
                         class="input-field"
-                        placeholder="Project Description"></textarea>
+                        placeholder="Post ke neeche caption likhein..."
+                        rows="4">
+                    </textarea>
 
-
-                    <input
-                        type="text"
-                        id="postTags"
-                        class="input-field"
-                        placeholder="Tags — example: Web Design, UI/UX, React">
-
-
-                    <label style="display:block;margin-bottom:8px;">
-                        Project Images
-                    </label>
 
                     <input
                         type="file"
-                        id="postImages"
-                        class="file-input"
+                        id="portfolioImages"
                         accept="image/*"
-                        multiple>
+                        multiple
+                        class="input-field">
 
-
-                    <!-- IMAGE PREVIEW -->
 
                     <div
                         id="imagePreview"
-                        class="image-preview">
+                        class="preview">
                     </div>
 
 
                     <button
                         class="btn-main"
-                        onclick="publishPost()">
+                        onclick="createPortfolioPost()">
 
-                        🚀 Publish Post
+                        Publish Portfolio Post
 
                     </button>
 
 
                     <p
-                        id="uploadStatus"
-                        style="font-size:13px;color:#60a5fa;">
+                        id="portfolioStatus"
+                        style="
+                            color:#9ca3af;
+                            font-size:13px;
+                        ">
+
                     </p>
 
                 </div>
+
 
 
                 <!-- POSTS -->
 
-                <h3>
-                    Published Posts
-                </h3>
+                <div class="section-box">
 
-                <div id="adminPosts">
-
-                    <p style="color:#9ca3af;">
-                        Posts loading...
-                    </p>
-
-                </div>
-
-            </section>
+                    <h3>
+                        Published Portfolio Posts
+                    </h3>
 
 
-            <!-- ========================= -->
-            <!-- CHAT SECTION -->
-            <!-- ========================= -->
+                    <div
+                        id="portfolioPosts">
 
-            <section
-                id="chatSection"
-                class="admin-section">
-
-                <h2>
-                    Client Chats
-                </h2>
-
-
-                <div class="chat-layout">
-
-                    <div class="chat-clients">
-
-                        <h4>
-                            Clients
-                        </h4>
-
-                        <div id="sidebarClients"></div>
-
-                    </div>
-
-
-                    <div class="chat-box">
-
-                        <div
-                            id="chatHeaderTitle"
-                            style="border-bottom:1px solid #374151;padding-bottom:10px;">
-
-                            Koi client select karein
-
-                        </div>
-
-
-                        <div
-                            id="messagesContainer"
-                            class="messages-box">
-
-                            <p
-                                style="color:#9ca3af;text-align:center;">
-
-                                Client select karein.
-
-                            </p>
-
-                        </div>
-
-
-                        <div class="chat-input">
-
-                            <input
-                                type="text"
-                                id="replyInput"
-                                class="input-field"
-                                style="margin:0;"
-                                placeholder="Reply..."
-                                disabled>
-
-
-                            <button
-                                id="sendReplyBtn"
-                                onclick="sendReply()"
-                                class="btn-main"
-                                style="width:auto;"
-                                disabled>
-
-                                Send
-
-                            </button>
-
-                        </div>
+                        Loading...
 
                     </div>
 
                 </div>
 
-            </section>
 
-        </main>
+            </div>
 
-    </section>
+        </div>
+
+    </div>
 
 </div>
+
 
 
 <!-- FIREBASE -->
@@ -734,366 +516,741 @@
 
 <script>
 
-    /* =========================================
-       FIREBASE CONFIG
-    ========================================= */
+const firebaseConfig = {
 
-    const firebaseConfig = {
+    apiKey:
+        "AIzaSyBPFYE7EUeDJHpTKvBjY6ybHTj-85OYZFY",
 
-        apiKey: "AIzaSyBPFYE7EUeDJHpTKvBjY6ybHTj-85OYZFY",
+    authDomain:
+        "pixelworks-agency.firebaseapp.com",
 
-        authDomain:
-            "pixelworks-agency.firebaseapp.com",
+    databaseURL:
+        "https://pixelworks-agency-default-rtdb.asia-southeast1.firebasedatabase.app",
 
-        databaseURL:
-            "https://pixelworks-agency-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId:
+        "pixelworks-agency",
 
-        projectId:
-            "pixelworks-agency",
+    storageBucket:
+        "pixelworks-agency.firebasestorage.app",
 
-        storageBucket:
-            "pixelworks-agency.firebasestorage.app",
+    messagingSenderId:
+        "265457916349",
 
-        messagingSenderId:
-            "265457916349",
+    appId:
+        "1:265457916349:web:1f2f903ed3eaf858c51ad4",
 
-        appId:
-            "1:265457916349:web:1f2f903ed3eaf858c51ad4",
+    measurementId:
+        "G-21TVP274BD"
 
-        measurementId:
-            "G-21TVP274BD"
-    };
+};
 
 
-    firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
 
 
-    const auth =
-        firebase.auth();
-
-    const rtdb =
-        firebase.database();
-
-    const storage =
-        firebase.storage();
+const auth =
+    firebase.auth();
 
 
-    /* =========================================
-       ADMIN AUTHENTICATION
-    ========================================= */
+const rtdb =
+    firebase.database();
 
-    auth.onAuthStateChanged(function(user) {
 
-        if (user) {
+const storage =
+    firebase.storage();
 
-            openDashboard();
 
-        } else {
 
-            document
-                .getElementById("loginSection")
-                .style.display = "block";
+/*
+ ADMIN UID
+*/
 
-            document
-                .getElementById("dashboardSection")
-                .style.display = "none";
+const ADMIN_UID =
+    "MSbStxjennTwlhhW8cT75ONjRrm2";
 
-            document
-                .getElementById("logoutBtn")
-                .style.display = "none";
+
+let activePhone = null;
+
+
+
+/*
+ AUTH STATE
+*/
+
+auth.onAuthStateChanged(
+    async function(user) {
+
+        if (!user) {
+
+            showLogin();
+
+            return;
+
         }
 
-    });
+
+        if (user.uid !== ADMIN_UID) {
+
+            await auth.signOut();
+
+            showLogin();
+
+            document.getElementById(
+                "loginError"
+            ).textContent =
+                "Is account ko admin access nahi hai.";
+
+            document.getElementById(
+                "loginError"
+            ).style.display =
+                "block";
+
+            return;
+
+        }
 
 
-    function handleLogin(e) {
+        openDashboard();
 
-        e.preventDefault();
-
-
-        const email =
-            document
-                .getElementById("emailInput")
-                .value
-                .trim();
+    }
+);
 
 
-        const password =
-            document
-                .getElementById("passInput")
-                .value;
+
+/*
+ LOGIN
+*/
+
+async function loginAdmin() {
+
+    const email =
+        document
+            .getElementById("adminEmail")
+            .value
+            .trim();
 
 
-        auth.signInWithEmailAndPassword(
+    const password =
+        document
+            .getElementById("adminPassword")
+            .value;
+
+
+    const error =
+        document.getElementById(
+            "loginError"
+        );
+
+
+    error.style.display =
+        "none";
+
+
+    if (!email || !password) {
+
+        error.textContent =
+            "Email aur password bharo.";
+
+        error.style.display =
+            "block";
+
+        return;
+
+    }
+
+
+    try {
+
+        await auth.signInWithEmailAndPassword(
             email,
             password
-        )
+        );
 
-        .then(function() {
+    } catch (e) {
 
-            document
-                .getElementById("errorMsg")
-                .style.display = "none";
+        console.error(e);
 
-        })
+        error.textContent =
+            "Email ya password galat hai.";
 
-        .catch(function(error) {
-
-            const errorMsg =
-                document.getElementById("errorMsg");
-
-            errorMsg.textContent =
-                "Login failed: " + error.message;
-
-            errorMsg.style.display = "block";
-
-        });
+        error.style.display =
+            "block";
 
     }
 
+}
 
-    function logoutAdmin() {
 
-        auth.signOut();
 
-    }
+/*
+ SHOW LOGIN
+*/
 
+function showLogin() {
 
-    function openDashboard() {
+    document.getElementById(
+        "loginSection"
+    ).style.display =
+        "block";
 
-        document
-            .getElementById("loginSection")
-            .style.display = "none";
 
+    document.getElementById(
+        "dashboardSection"
+    ).style.display =
+        "none";
 
-        document
-            .getElementById("dashboardSection")
-            .style.display = "flex";
 
+    document.getElementById(
+        "logoutBtn"
+    ).style.display =
+        "none";
 
-        document
-            .getElementById("logoutBtn")
-            .style.display = "block";
+}
 
 
-        loadPortfolioPosts();
 
-        loadClientsList();
+/*
+ OPEN DASHBOARD
+*/
 
-    }
+function openDashboard() {
 
+    document.getElementById(
+        "loginSection"
+    ).style.display =
+        "none";
 
-    /* =========================================
-       SECTION SWITCHING
-    ========================================= */
 
-    function showSection(sectionId, button) {
+    document.getElementById(
+        "dashboardSection"
+    ).style.display =
+        "block";
 
-        document
-            .querySelectorAll(".admin-section")
-            .forEach(function(section) {
 
-                section.classList.remove("active");
+    document.getElementById(
+        "logoutBtn"
+    ).style.display =
+        "block";
 
-            });
 
+    loadClientsList();
 
-        document
-            .getElementById(sectionId)
-            .classList.add("active");
+    loadPortfolioPosts();
 
+}
 
-        document
-            .querySelectorAll(".menu-btn")
-            .forEach(function(btn) {
 
-                btn.classList.remove("active");
 
-            });
+/*
+ LOGOUT
+*/
 
+async function logoutAdmin() {
 
-        button.classList.add("active");
+    await auth.signOut();
 
-    }
+}
 
 
-    /* =========================================
-       IMAGE PREVIEW
-    ========================================= */
 
-    document
-        .getElementById("postImages")
-        .addEventListener("change", function() {
+/*
+ CLIENT LIST
+*/
 
-            const preview =
-                document.getElementById("imagePreview");
+function loadClientsList() {
 
-            preview.innerHTML = "";
+    const list =
+        document.getElementById(
+            "sidebarClients"
+        );
 
 
-            const files = this.files;
+    rtdb
+        .ref("chats")
+        .on("value", function(snapshot) {
 
+            list.innerHTML = "";
 
-            Array.from(files).forEach(function(file) {
 
-                if (!file.type.startsWith("image/")) {
-                    return;
-                }
+            if (!snapshot.exists()) {
 
+                list.innerHTML =
+                    "<p style='color:#9ca3af;'>No clients.</p>";
 
-                const img =
-                    document.createElement("img");
-
-
-                img.src =
-                    URL.createObjectURL(file);
-
-
-                preview.appendChild(img);
-
-            });
-
-        });
-
-
-    /* =========================================
-       CREATE PORTFOLIO POST
-    ========================================= */
-
-    async function publishPost() {
-
-        if (!auth.currentUser) {
-
-            alert("Pehle admin login karein.");
-
-            return;
-        }
-
-
-        const title =
-            document
-                .getElementById("postTitle")
-                .value
-                .trim();
-
-
-        const description =
-            document
-                .getElementById("postDescription")
-                .value
-                .trim();
-
-
-        const tagsText =
-            document
-                .getElementById("postTags")
-                .value
-                .trim();
-
-
-        const files =
-            document
-                .getElementById("postImages")
-                .files;
-
-
-        const status =
-            document
-                .getElementById("uploadStatus");
-
-
-        if (!title) {
-
-            alert("Project title likho.");
-
-            return;
-        }
-
-
-        if (!files.length) {
-
-            alert("Kam se kam ek image select karo.");
-
-            return;
-        }
-
-
-        status.textContent =
-            "Images upload ho rahi hain...";
-
-
-        try {
-
-            const postRef =
-                rtdb.ref("portfolio").push();
-
-
-            const postId =
-                postRef.key;
-
-
-            const imageUrls = [];
-
-
-            for (
-                let i = 0;
-                i < files.length;
-                i++
-            ) {
-
-                const file = files[i];
-
-
-                const extension =
-                    file.name
-                        .split(".")
-                        .pop();
-
-
-                const filePath =
-                    `portfolio/${postId}/${Date.now()}_${i}.${extension}`;
-
-
-                const storageRef =
-                    storage.ref(filePath);
-
-
-                await storageRef.put(file);
-
-
-                const downloadURL =
-                    await storageRef.getDownloadURL();
-
-
-                imageUrls.push(downloadURL);
-
-
-                status.textContent =
-                    `Image ${i + 1}/${files.length} uploaded...`;
+                return;
 
             }
 
 
-            const tags =
-                tagsText
-                    ? tagsText
-                        .split(",")
-                        .map(tag => tag.trim())
-                        .filter(Boolean)
-                    : [];
+            const chats =
+                snapshot.val();
 
 
-            await postRef.set({
+            Object.keys(chats).forEach(
+                function(phone) {
 
-                title: title,
+                    const client =
+                        chats[phone];
 
-                description: description,
 
-                tags: tags,
+                    const messages =
+                        Object.values(
+                            client.messages || {}
+                        );
 
-                images: imageUrls,
 
-                createdAt: firebase.database.ServerValue.TIMESTAMP,
+                    const last =
+                        messages[
+                            messages.length - 1
+                        ];
+
+
+                    const item =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    item.className =
+                        "client-item";
+
+
+                    if (
+                        activePhone === phone
+                    ) {
+
+                        item.classList.add(
+                            "active"
+                        );
+
+                    }
+
+
+                    item.innerHTML =
+
+                        "<strong>" +
+
+                        (
+                            client.name ||
+                            phone
+                        ) +
+
+                        "</strong><br>" +
+
+                        "<span style='font-size:12px;color:#9ca3af;'>" +
+
+                        (
+                            last
+                                ? last.text.substring(
+                                    0,
+                                    35
+                                )
+                                : "Naya chat"
+                        ) +
+
+                        "</span>";
+
+
+                    item.onclick =
+                        function() {
+
+                            activePhone =
+                                phone;
+
+                            openChat(phone);
+
+                            loadClientsList();
+
+                        };
+
+
+                    list.appendChild(item);
+
+                }
+            );
+
+        });
+
+}
+
+
+
+/*
+ OPEN CHAT
+*/
+
+function openChat(phone) {
+
+    document
+        .getElementById(
+            "replyInput"
+        )
+        .disabled =
+        false;
+
+
+    document
+        .getElementById(
+            "sendReplyBtn"
+        )
+        .disabled =
+        false;
+
+
+    rtdb
+        .ref("chats/" + phone)
+        .once("value")
+        .then(function(snapshot) {
+
+            const client =
+                snapshot.val();
+
+
+            document.getElementById(
+                "chatHeaderTitle"
+            ).textContent =
+                "Chat: " +
+                (
+                    client.name ||
+                    phone
+                );
+
+        });
+
+
+    rtdb
+        .ref(
+            "chats/" +
+            phone +
+            "/messages"
+        )
+        .on("value", function(snapshot) {
+
+            const box =
+                document.getElementById(
+                    "messagesContainer"
+                );
+
+
+            box.innerHTML = "";
+
+
+            if (!snapshot.exists()) {
+
+                return;
+
+            }
+
+
+            Object.values(
+                snapshot.val()
+            ).forEach(
+                function(msg) {
+
+                    const bubble =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    bubble.className =
+                        "msg-bubble";
+
+
+                    bubble.textContent =
+                        msg.text;
+
+
+                    if (
+                        msg.sender ===
+                        "admin"
+                    ) {
+
+                        bubble.style.background =
+                            "#3b82f6";
+
+                        bubble.style.alignSelf =
+                            "flex-end";
+
+                    } else {
+
+                        bubble.style.background =
+                            "#1f2937";
+
+                        bubble.style.alignSelf =
+                            "flex-start";
+
+                    }
+
+
+                    box.appendChild(
+                        bubble
+                    );
+
+                }
+            );
+
+
+            box.scrollTop =
+                box.scrollHeight;
+
+        });
+
+}
+
+
+
+/*
+ SEND REPLY
+*/
+
+function sendReply() {
+
+    const input =
+        document.getElementById(
+            "replyInput"
+        );
+
+
+    const text =
+        input.value.trim();
+
+
+    if (!text || !activePhone) {
+
+        return;
+
+    }
+
+
+    rtdb
+        .ref(
+            "chats/" +
+            activePhone +
+            "/messages"
+        )
+        .push({
+
+            sender:
+                "admin",
+
+            text:
+                text,
+
+            time:
+                Date.now()
+
+        });
+
+
+    input.value = "";
+
+}
+
+
+
+/*
+ ENTER TO SEND
+*/
+
+document
+    .getElementById(
+        "replyInput"
+    )
+    .addEventListener(
+        "keypress",
+        function(e) {
+
+            if (
+                e.key === "Enter"
+            ) {
+
+                sendReply();
+
+            }
+
+        }
+    );
+
+
+
+/*
+ IMAGE PREVIEW
+*/
+
+document
+    .getElementById(
+        "portfolioImages"
+    )
+    .addEventListener(
+        "change",
+        function() {
+
+            const preview =
+                document.getElementById(
+                    "imagePreview"
+                );
+
+
+            preview.innerHTML = "";
+
+
+            Array.from(
+                this.files
+            ).forEach(
+                function(file) {
+
+                    const reader =
+                        new FileReader();
+
+
+                    reader.onload =
+                        function(e) {
+
+                            const img =
+                                document.createElement(
+                                    "img"
+                                );
+
+
+                            img.src =
+                                e.target.result;
+
+
+                            preview.appendChild(
+                                img
+                            );
+
+                        };
+
+
+                    reader.readAsDataURL(
+                        file
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+
+/*
+ CREATE PORTFOLIO POST
+*/
+
+async function createPortfolioPost() {
+
+    const title =
+        document
+            .getElementById(
+                "portfolioTitle"
+            )
+            .value
+            .trim();
+
+
+    const caption =
+        document
+            .getElementById(
+                "portfolioCaption"
+            )
+            .value
+            .trim();
+
+
+    const files =
+        document
+            .getElementById(
+                "portfolioImages"
+            )
+            .files;
+
+
+    const status =
+        document.getElementById(
+            "portfolioStatus"
+        );
+
+
+    if (!files.length) {
+
+        status.textContent =
+            "Kam se kam ek image select karo.";
+
+        return;
+
+    }
+
+
+    status.textContent =
+        "Images upload ho rahi hain...";
+
+
+    try {
+
+        const imageUrls = [];
+
+
+        for (
+            let i = 0;
+            i < files.length;
+            i++
+        ) {
+
+            const file =
+                files[i];
+
+
+            const fileName =
+                Date.now() +
+                "_" +
+                i +
+                "_" +
+                file.name;
+
+
+            const storageRef =
+                storage.ref(
+                    "portfolio/" +
+                    fileName
+                );
+
+
+            await storageRef.put(
+                file
+            );
+
+
+            const url =
+                await storageRef.getDownloadURL();
+
+
+            imageUrls.push(url);
+
+        }
+
+
+        /*
+         SAVE POST
+        */
+
+        await rtdb
+            .ref("portfolio")
+            .push({
+
+                title:
+                    title,
+
+                caption:
+                    caption,
+
+                images:
+                    imageUrls,
+
+                createdAt:
+                    Date.now(),
 
                 createdBy:
                     auth.currentUser.uid
@@ -1101,598 +1258,208 @@
             });
 
 
-            status.textContent =
-                "✅ Post successfully published!";
+        status.textContent =
+            "Portfolio post successfully publish ho gaya!";
 
 
-            document
-                .getElementById("postTitle")
-                .value = "";
+        document.getElementById(
+            "portfolioTitle"
+        ).value = "";
 
 
-            document
-                .getElementById("postDescription")
-                .value = "";
+        document.getElementById(
+            "portfolioCaption"
+        ).value = "";
 
 
-            document
-                .getElementById("postTags")
-                .value = "";
+        document.getElementById(
+            "portfolioImages"
+        ).value = "";
 
 
-            document
-                .getElementById("postImages")
-                .value = "";
+        document.getElementById(
+            "imagePreview"
+        ).innerHTML = "";
 
 
-            document
-                .getElementById("imagePreview")
-                .innerHTML = "";
+        loadPortfolioPosts();
 
 
-            loadPortfolioPosts();
+    } catch (error) {
 
-        }
+        console.error(error);
 
-        catch(error) {
-
-            console.error(error);
-
-            status.textContent =
-                "❌ Upload failed: " + error.message;
-
-        }
+        status.textContent =
+            "Upload error: " +
+            error.message;
 
     }
 
+}
 
-    /* =========================================
-       LOAD PORTFOLIO POSTS
-    ========================================= */
 
-    function loadPortfolioPosts() {
 
-        const container =
-            document.getElementById("adminPosts");
+/*
+ LOAD PORTFOLIO POSTS
+*/
 
+function loadPortfolioPosts() {
 
-        rtdb.ref("portfolio")
-            .orderByChild("createdAt")
-            .on("value", function(snapshot) {
+    rtdb
+        .ref("portfolio")
+        .on("value", function(snapshot) {
 
-                container.innerHTML = "";
+            const container =
+                document.getElementById(
+                    "portfolioPosts"
+                );
 
 
-                if (!snapshot.exists()) {
+            container.innerHTML = "";
 
-                    container.innerHTML =
-                        `<p style="color:#9ca3af;">
-                            Abhi koi portfolio post nahi hai.
-                        </p>`;
 
-                    return;
-                }
+            if (!snapshot.exists()) {
 
+                container.innerHTML =
+                    "<p style='color:#9ca3af;'>Abhi koi portfolio post nahi hai.</p>";
 
-                const posts = [];
-
-
-                snapshot.forEach(function(child) {
-
-                    posts.push({
-
-                        id: child.key,
-
-                        ...child.val()
-
-                    });
-
-                });
-
-
-                posts.reverse();
-
-
-                posts.forEach(function(post) {
-
-                    const card =
-                        document.createElement("div");
-
-
-                    card.className =
-                        "post-card";
-
-
-                    let imagesHTML = "";
-
-
-                    (post.images || [])
-                        .forEach(function(url) {
-
-                            imagesHTML += `
-                                <img
-                                    src="${url}"
-                                    alt="Project image">
-                            `;
-
-                        });
-
-
-                    let tagsHTML = "";
-
-
-                    (post.tags || [])
-                        .forEach(function(tag) {
-
-                            tagsHTML += `
-                                <span class="tag">
-                                    #${escapeHTML(tag)}
-                                </span>
-                            `;
-
-                        });
-
-
-                    card.innerHTML = `
-
-                        <h3>
-                            ${escapeHTML(post.title || "")}
-                        </h3>
-
-                        <p style="color:#9ca3af;">
-                            ${escapeHTML(post.description || "")}
-                        </p>
-
-                        <div class="post-images">
-                            ${imagesHTML}
-                        </div>
-
-                        <div>
-                            ${tagsHTML}
-                        </div>
-
-                        <br>
-
-                        <button
-                            class="delete-btn"
-                            onclick="deletePost('${post.id}')">
-
-                            Delete Post
-
-                        </button>
-
-                    `;
-
-
-                    container.appendChild(card);
-
-                });
-
-            });
-
-    }
-
-
-    /* =========================================
-       DELETE POST
-    ========================================= */
-
-    async function deletePost(postId) {
-
-        if (!auth.currentUser) {
-
-            return;
-
-        }
-
-
-        const confirmDelete =
-            confirm(
-                "Kya tum ye portfolio post delete karna chahte ho?"
-            );
-
-
-        if (!confirmDelete) {
-
-            return;
-
-        }
-
-
-        try {
-
-            const postSnapshot =
-                await rtdb
-                    .ref("portfolio/" + postId)
-                    .once("value");
-
-
-            const post =
-                postSnapshot.val();
-
-
-            /* Delete images from Storage */
-
-            if (post && post.images) {
-
-                for (
-                    const imageUrl of post.images
-                ) {
-
-                    try {
-
-                        const imageRef =
-                            storage.refFromURL(imageUrl);
-
-                        await imageRef.delete();
-
-                    }
-
-                    catch(error) {
-
-                        console.log(
-                            "Image delete skipped:",
-                            error.message
-                        );
-
-                    }
-
-                }
+                return;
 
             }
 
 
-            /* Delete database post */
-
-            await rtdb
-                .ref("portfolio/" + postId)
-                .remove();
+            const posts =
+                snapshot.val();
 
 
-            alert("Post delete ho gaya.");
+            Object.entries(posts)
+                .reverse()
+                .forEach(
+                    function([id, post]) {
 
-        }
-
-        catch(error) {
-
-            console.error(error);
-
-            alert(
-                "Delete failed: " +
-                error.message
-            );
-
-        }
-
-    }
-
-
-    /* =========================================
-       SECURITY — HTML ESCAPE
-    ========================================= */
-
-    function escapeHTML(value) {
-
-        return String(value)
-
-            .replaceAll("&", "&amp;")
-
-            .replaceAll("<", "&lt;")
-
-            .replaceAll(">", "&gt;")
-
-            .replaceAll('"', "&quot;")
-
-            .replaceAll("'", "&#039;");
-
-    }
-
-
-    /* =========================================
-       CLIENT CHAT
-    ========================================= */
-
-    let activePhone = null;
-
-
-    function loadClientsList() {
-
-        const listDiv =
-            document.getElementById(
-                "sidebarClients"
-            );
-
-
-        rtdb.ref("chats").on(
-            "value",
-            function(snapshot) {
-
-                listDiv.innerHTML = "";
-
-
-                if (!snapshot.exists()) {
-
-                    listDiv.innerHTML =
-                        `<p style="color:#9ca3af;">
-                            Koi client nahi.
-                        </p>`;
-
-                    return;
-                }
-
-
-                const chats =
-                    snapshot.val();
-
-
-                Object.keys(chats)
-                    .forEach(function(phone) {
-
-                        const client =
-                            chats[phone];
-
-
-                        const messages =
-                            Object.values(
-                                client.messages || {}
-                            );
-
-
-                        const lastMsg =
-                            messages[messages.length - 1];
-
-
-                        const item =
+                        const article =
                             document.createElement(
                                 "div"
                             );
 
 
-                        item.className =
-                            "client-item" +
+                        article.className =
+                            "portfolio-post";
+
+
+                        let imagesHTML =
+                            "";
+
+
+                        (
+                            post.images ||
+                            []
+                        ).forEach(
+                            function(url) {
+
+                                imagesHTML +=
+                                    "<img src='" +
+                                    url +
+                                    "'>";
+
+                            }
+                        );
+
+
+                        article.innerHTML =
+
+                            "<h4>" +
+
                             (
-                                activePhone === phone
-                                    ? " active"
-                                    : ""
-                            );
+                                post.title ||
+                                "Untitled"
+                            ) +
+
+                            "</h4>" +
+
+                            "<p style='color:#9ca3af;'>" +
+
+                            (
+                                post.caption ||
+                                ""
+                            ) +
+
+                            "</p>" +
+
+                            "<div class='portfolio-images'>" +
+
+                            imagesHTML +
+
+                            "</div>" +
+
+                            "<button class='btn-danger' onclick=\"deletePortfolioPost('" +
+                            id +
+                            "')\">" +
+
+                            "Delete Post" +
+
+                            "</button>";
 
 
-                        item.innerHTML = `
-
-                            <strong>
-                                ${escapeHTML(
-                                    client.name ||
-                                    phone
-                                )}
-                            </strong>
-
-                            <br>
-
-                            <span style="
-                                font-size:12px;
-                                color:#9ca3af;
-                            ">
-
-                                ${
-                                    lastMsg
-                                        ? escapeHTML(
-                                            lastMsg.text
-                                                .substring(
-                                                    0,
-                                                    30
-                                                )
-                                          ) + "..."
-                                        : "Naya chat"
-                                }
-
-                            </span>
-
-                        `;
-
-
-                        item.onclick =
-                            function() {
-
-                                activePhone =
-                                    phone;
-
-                                loadClientsList();
-
-                                openChat(phone);
-
-                            };
-
-
-                        listDiv.appendChild(item);
-
-                    });
-
-            }
-        );
-
-    }
-
-
-    function openChat(phone) {
-
-        document
-            .getElementById("replyInput")
-            .disabled = false;
-
-
-        document
-            .getElementById("sendReplyBtn")
-            .disabled = false;
-
-
-        rtdb
-            .ref("chats/" + phone)
-            .once("value")
-            .then(function(snapshot) {
-
-                const client =
-                    snapshot.val();
-
-
-                document
-                    .getElementById(
-                        "chatHeaderTitle"
-                    )
-                    .textContent =
-                    `Chat: ${
-                        client.name || phone
-                    } (${phone})`;
-
-            });
-
-
-        const box =
-            document.getElementById(
-                "messagesContainer"
-            );
-
-
-        rtdb
-            .ref(
-                "chats/" +
-                phone +
-                "/messages"
-            )
-            .on(
-                "value",
-                function(snapshot) {
-
-                    box.innerHTML = "";
-
-
-                    if (!snapshot.exists()) {
-
-                        return;
+                        container.appendChild(
+                            article
+                        );
 
                     }
+                );
+
+        });
+
+}
 
 
-                    const messages =
-                        snapshot.val();
 
+/*
+ DELETE PORTFOLIO POST
 
-                    Object.values(messages)
-                        .forEach(function(msg) {
+Note:
+Database post delete hota hai.
+Storage files later clean-up karenge.
+*/
 
-                            const bubble =
-                                document.createElement(
-                                    "div"
-                                );
+async function deletePortfolioPost(id) {
 
-
-                            bubble.className =
-                                "msg-bubble";
-
-
-                            bubble.textContent =
-                                msg.text;
-
-
-                            if (
-                                msg.sender ===
-                                "admin"
-                            ) {
-
-                                bubble.style.background =
-                                    "#3b82f6";
-
-                                bubble.style.alignSelf =
-                                    "flex-end";
-
-                            }
-
-                            else {
-
-                                bubble.style.background =
-                                    "#1f2937";
-
-                                bubble.style.alignSelf =
-                                    "flex-start";
-
-                            }
-
-
-                            box.appendChild(
-                                bubble
-                            );
-
-                        });
-
-
-                    box.scrollTop =
-                        box.scrollHeight;
-
-                }
-            );
-
-    }
-
-
-    function sendReply() {
-
-        const input =
-            document.getElementById(
-                "replyInput"
-            );
-
-
-        const text =
-            input.value.trim();
-
-
-        if (
-            !text ||
-            !activePhone
-        ) {
-
-            return;
-
-        }
-
-
-        rtdb
-            .ref(
-                "chats/" +
-                activePhone +
-                "/messages"
-            )
-            .push({
-
-                sender: "admin",
-
-                text: text,
-
-                time: Date.now()
-
-            });
-
-
-        input.value = "";
-
-    }
-
-
-    document
-        .getElementById("replyInput")
-        .addEventListener(
-            "keypress",
-            function(e) {
-
-                if (e.key === "Enter") {
-
-                    sendReply();
-
-                }
-
-            }
+    const confirmDelete =
+        confirm(
+            "Kya tum ye portfolio post delete karna chahte ho?"
         );
 
+
+    if (!confirmDelete) {
+
+        return;
+
+    }
+
+
+    try {
+
+        await rtdb
+            .ref(
+                "portfolio/" +
+                id
+            )
+            .remove();
+
+
+    } catch (error) {
+
+        alert(
+            "Delete error: " +
+            error.message
+        );
+
+    }
+
+}
+
 </script>
+
 
 </body>
 </html>
